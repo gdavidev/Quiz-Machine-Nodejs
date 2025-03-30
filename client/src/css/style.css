@@ -2,6 +2,17 @@
     --max-screen-width: 1200px;
     --time-per-question-ms: 5000ms;
     --time-on-results-view-ms: 1500ms;
+
+    --color-background: #F5F0EC;
+    --color-text: #7D7D7D;
+    --color-title: #656565;
+    --color-main: #AFCEAF;
+    --color-main-lighter: #AFCEAF26;
+    --color-card-background: #FFFFFF;
+    --color-border: #E1E1E1;
+
+    --color-alternative-letter: #CACACA;
+    --color-alternative-background: #F5F5F5;
 }
 
 * {

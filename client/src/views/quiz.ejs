@@ -1,0 +1,48 @@
+<header>
+    <div id="header-content-container">
+        <div id="score-container">
+            Score: <span id="score">0</span>
+        </div>
+        <div id="current-question-container">
+            <span id="current-question">0</span>
+            <span>/</span>
+            <span id="question-amount">0</span>
+        </div>
+    </div>
+</header>
+
+<main>
+    <section id="main-view-container">
+        <span id="question-text"></span>
+
+        <span id="countdown-text"></span>
+
+        <div id="result-display-container">
+            <span id="result-text"></span>
+            <div>Score: + <span id="result-score-text"></span></div>
+        </div>
+    </section>
+
+    <div id="time-bar-container">
+        <div id="time-bar"></div>
+    </div>
+
+    <section id="alternatives-container">
+        <button class="alternative-btn btn-blue"></button>
+        <button class="alternative-btn btn-red"></button>
+        <button class="alternative-btn btn-yellow"></button>
+        <button class="alternative-btn btn-green"></button>
+    </section>
+</main>
+
+<dialog id="final-result-dialog">
+    <div id="final-result-dialog-content">
+        <div>
+            <span id="final-result-text"></span>
+            <div>
+                Seu Score: <span id="final-result-score-text"></span>
+            </div>
+        </div>
+        <button id="try-again-button">Tentar Novamente</button>
+    </div>
+</dialog>

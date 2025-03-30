@@ -19,6 +19,19 @@ module.exports = {
         ]
       },
       {
+        test: /\.ejs$/,
+        exclude: /index\.ejs$/, // Exclude your main template
+        use: [
+          {
+            loader: 'ejs-loader',
+            options: {
+              esModule: false,  // Add this line
+              variable: 'data'  // Add this line
+            }
+          }
+        ]
+      },
+      {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
         generator: {
@@ -39,7 +52,8 @@ module.exports = {
       filename: 'styles/[name].css', // Outputs CSS as a separate file
     }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, './src/index.html'),  // Your source HTML
+      template: '!!ejs-loader?esModule=false&variable=data!./client/src/index.ejs',
+      //template: path.resolve(__dirname, './src/index.html'),  // Your source HTML
       filename: 'index.html',        // Output in /dist/index.html
       title: 'Quiz App',
       appVersion: process.env.npm_package_version,
