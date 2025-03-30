@@ -1,12 +1,10 @@
-# Quiz Machine Project
+# Quiz Machine Nodejs
 ## Contributing
 After cloning the project you must run the following:
 ```bash
 npm i # Install Node Dependencies
-npm i --save-dev electron # Install electron
-npm run dev # Initialize webpack in development mode
-electron . # Initialize project 
+
+# Excute the following one for each terminal instance
+npm run webpack:start # Initialize webpack in development mode
+npm run node:start # Initialize webpack in development mode
 ```
-On the file ``index.js`` there is a ``PageContent`` class that controls
-every aspect of the page and game flow, there is a commented Configuration section in
-the class properties which will dictate some aspects of the game.
