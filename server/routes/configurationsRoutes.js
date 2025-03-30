@@ -2,10 +2,10 @@ const express = require('express');
 const router = express.Router();
 const dataAccess = require('../data/DataAccess');
 
-router.post('/configuration/update', async (req, res) => {
+router.put('/configuration/update', async (req, res) => {
   await dataAccess.configurationRepository.update(req.body);
   
-  res.status(204);
+  res.status(204).send();
 });
 
 router.get('/configuration', async (req, res) => {

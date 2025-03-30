@@ -13,6 +13,9 @@ export default class PlayersAPI {
   static save(email, phone) {
     fetch("http://localhost:3000/api/players/store", {
       method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({email: email, phone: phone})
     })
         .catch(err => console.log(err));

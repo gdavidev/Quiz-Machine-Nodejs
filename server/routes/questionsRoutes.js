@@ -6,7 +6,7 @@ router.post('/questions/store', async (req, res) => {
   const questionInfo = req.body;
   await dataAccess.questionRepository.save(questionInfo);
   
-  res.status(204);
+  res.status(204).send();
 });
 
 router.get('/questions', async (req, res) => {
@@ -18,7 +18,7 @@ router.get('/questions', async (req, res) => {
 router.delete('/questions/delete', async (req, res) => {
   await dataAccess.questionRepository.erase();
   
-  res.status(204);
+  res.status(204).send();
 });
 
 module.exports = router;

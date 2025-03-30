@@ -7,9 +7,9 @@ router.post('/players/store', async (req, res) => {
   if (playerInfo && playerInfo.email && playerInfo.phone) {
     await dataAccess.playerRepository.save(playerInfo.email, playerInfo.phone);
     
-    res.status(204);
+    res.status(204).send();
   } else {
-    res.status(404);
+    res.status(404).send();
   }
 });
 

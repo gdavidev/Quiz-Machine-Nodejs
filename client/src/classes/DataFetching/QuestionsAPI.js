@@ -21,6 +21,9 @@ export default class QuestionsAPI {
   static save(question) {
     fetch("http://localhost:3000/api/questions/store", {
       method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify(question),
     })
         .catch(err => console.log(err));
