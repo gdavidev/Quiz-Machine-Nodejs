@@ -17,7 +17,6 @@ export default class AdminMenuGameState {
         this.adminQuestionsBtn.onclick = () => this.requestAdminGameState('questions-form')
         this.adminConfigurationBtn.onclick = () => this.requestAdminGameState('configuration-form')
         this.adminExitBtn.onclick = () => {
-            this.adminExitBtn.blur();
             updateEnvironment().then(() => {
                 requestGameState('main-menu');
             })
@@ -39,7 +38,7 @@ export default class AdminMenuGameState {
     }
 
     exit(to) {
-        this.#hideMenu()
+        this.#hideMenu();
     }
 
     requestAdminGameState(gameState, data) {

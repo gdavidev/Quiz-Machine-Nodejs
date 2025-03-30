@@ -15,7 +15,8 @@ export default class MainMenuGameState {
   enter(from) {
     this.#showMenu();
     this.#resetGame();
-
+    
+    document.activeElement.blur(); // Remove focus from current focused element
     document.onkeydown = (e) => {
       if (e.key === 'Enter')
         this.requestGameState('admin')
