@@ -38,4 +38,8 @@ export default class ProgressLine {
   reset() {
     this.bar.set(0)
   }
+  
+  destroy() {
+    this.bar.destroy();
+  }
 }

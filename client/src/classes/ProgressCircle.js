@@ -70,4 +70,8 @@ export default class ProgressCircle {
       duration: 500,
     });
   }
+  
+  destroy() {
+    this.bar.destroy();
+  }
 }

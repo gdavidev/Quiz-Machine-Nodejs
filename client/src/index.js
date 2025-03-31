@@ -34,13 +34,20 @@ class PageContext {
       this.updateConfiguration(),
     ]).then(() => {
       this.#initializeStates()
-      this.currentState = 'main-menu';
-      this.states['main-menu'].enter('');
+      // this.currentState = 'main-menu'; // TODO iniciar no menu
+      // this.states['main-menu'].enter('');
+      this.currentState = 'show-results';
+      this.states['show-results'].enter('');
+      
       console.log(questions)
     });
   }
 
   #initializeStates() {
+    this.states && Object.values(this.states).forEach(value => {
+      value.destroy && value.destroy();
+    })
+    
     this.states = {
       'main-menu': new MainMenuGameState(this.requestGameState, this.state),
       'questions': new QuestionsGameState(this.requestGameState, configuration, this.state, questions),

@@ -30,10 +30,8 @@ export default class QuestionsGameState {
     this.resultTextWrongElement.style.display = 'none'
     this.resultTextTimeoutElement.style.display = 'none'
     
-    this.progressQuestions = new ProgressLine('question-progress-bar', configuration.get('numOfQuestions'));
-
-    const timePerQuestion = this.configuration.get('timePerQuestionMs');
-    this.progressCircle = new ProgressCircle('time-progress', timePerQuestion)
+    this.progressQuestions = new ProgressLine('question-progress-bar', this.configuration.get('numOfQuestions'));
+    this.progressCircle = new ProgressCircle('time-progress', this.configuration.get('timePerQuestionMs'))
     this.progressCircle.onFinish = () => this.#choseAlternative(null);
     
     this.configuration = configuration;
@@ -42,7 +40,13 @@ export default class QuestionsGameState {
   initialize() {
     this.questionAmountElement.textContent = String(this.configuration.get('numOfQuestions'));
     this.currentQuestionElement.textContent = '0';
+    
     ContainerVisibilityTransition.hide(this.questionsContentContainerElement);
+  }
+  
+  destroy() {
+    this.progressQuestions && this.progressQuestions.destroy();
+    this.progressCircle && this.progressCircle.destroy();
   }
   
   enter(from) {
@@ -134,7 +138,7 @@ export default class QuestionsGameState {
   #getAlternativeElement(alternative) {
     for (let i = 0; i < this.alternativesButtonsArr.length; i++) {
       const alternativeText = this.alternativesButtonsArr[i].getElementsByClassName('alternative-btn-text')[0].textContent;
-      
+      console.log(alternativeText, alternative)
       if (alternativeText === alternative) {
         return this.alternativesButtonsArr[i];
       }

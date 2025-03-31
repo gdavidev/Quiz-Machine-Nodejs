@@ -13,6 +13,8 @@ export default class QuestionDisplaySubGameState {
         this.adminSaveQuestionsBtn.style.display = 'none';
         this.adminAddQuestionBtn.onclick = () => this.#addNewQuestion();
         this.adminSaveQuestionsBtn.onclick = () => this.#saveQuestions();
+        
+        this.currentQuestionAmount = 0;
     }
 
     enter(from, data) {
@@ -34,6 +36,7 @@ export default class QuestionDisplaySubGameState {
         QuestionsAPI.get()
             .then((res) => {
                 res.forEach(question => {
+                    this.currentQuestionAmount++;
                     this.adminQuestionsInputContainer.appendChild(this.#createQuestionFormNugget(question));
                 })
             })
@@ -41,6 +44,7 @@ export default class QuestionDisplaySubGameState {
 
     #addNewQuestion() {
         this.adminQuestionsInputContainer.appendChild(this.#createQuestionFormNugget());
+        this.currentQuestionAmount++;
     }
 
     #saveQuestions() {
@@ -66,14 +70,16 @@ export default class QuestionDisplaySubGameState {
         const questions = [];
 
         Array.from(formNuggets).forEach((nugget) => {
+            const selectedAlternative = nugget.querySelector('input[type=radio]:checked')
+            console.log(selectedAlternative)
+            
             questions[questions.length] = new Question(
                 0,
                 nugget.querySelector('[name=Texto]').value,
                 nugget.querySelector('[name=Alternativa-1]').value,
                 nugget.querySelector('[name=Alternativa-2]').value,
                 nugget.querySelector('[name=Alternativa-3]').value,
-                nugget.querySelector('[name=Alternativa-4]').value,
-                nugget.querySelector('[name=Resposta]').value
+                nugget.querySelector(`[name=${selectedAlternative.value}]`).value
             );
         });
 
@@ -81,31 +87,41 @@ export default class QuestionDisplaySubGameState {
     }
 
     #createQuestionFormNugget(question) {
-        const container = FormBuilder.div(
-            'form-nugget', [
-                FormBuilder.formItem('Texto', question ? question.text : ''),
-                FormBuilder.div(
-                    'form-row', [
-                        FormBuilder.formItem('Alternativa 1', question ? question.alternative1 : ''),
-                        FormBuilder.formItem('Alternativa 2', question ? question.alternative2 : ''),
-                    ]),
-                FormBuilder.div(
-                    'form-row', [
-                        FormBuilder.formItem('Alternativa 3', question ? question.alternative3 : ''),
-                        FormBuilder.formItem('Alternativa 4', question ? question.alternative4 : ''),
-                    ]),
-                FormBuilder.formItem('Resposta', question ? question.answer : '')
+        const qst = question ?? new Question();
+        
+        const container =
+            FormBuilder.div('form-nugget', [
+                FormBuilder.formItem('Texto', qst.text ?? ''),
+                FormBuilder.div('form-row', [
+                    FormBuilder.radio(
+                        'alts-' + this.currentQuestionAmount + 1,
+                        'Alternativa-1',
+                        qst.id ? qst.alternative1 === qst.answer : true),
+                    FormBuilder.formItem('Alternativa 1', qst.alternative1 ?? ''),
+                ]),
+                FormBuilder.div('form-row', [
+                    FormBuilder.radio(
+                        'alts-' + this.currentQuestionAmount + 1,
+                        'Alternativa-2',
+                        qst.id ? qst.alternative2 === qst.answer : false),
+                    FormBuilder.formItem('Alternativa 2', qst.alternative2 ?? ''),
+                ]),
+                FormBuilder.div('form-row', [
+                    FormBuilder.radio(
+                        'alts-' + this.currentQuestionAmount + 1,
+                        'Alternativa-3',
+                        qst.id ? qst.alternative3 === qst.answer : false),
+                    FormBuilder.formItem('Alternativa 3', qst.alternative3 ?? ''),
+                ]),
+                FormBuilder.button(
+                    'Apagar',
+                    'btn',
+                    () => {
+                        this.adminQuestionsInputContainer.removeChild(container);
+                        this.currentQuestionAmount--;
+                    })
             ]);
-
-        const eraseButton = document.createElement('button');
-        eraseButton.className = 'btn btn-md btn-red';
-        eraseButton.textContent = 'Apagar'
-        eraseButton.onclick = () => this.adminQuestionsInputContainer.removeChild(container);
-
-        container.appendChild(eraseButton);
 
         return container;
     }
-
-
 }
