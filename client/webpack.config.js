@@ -15,7 +15,15 @@ module.exports = {
         test: /\.css$/i,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader'
+          'css-loader',
+          {
+            loader: 'postcss-loader', // Optional but recommended
+            options: {
+              postcssOptions: {
+                plugins: [require('autoprefixer')]
+              }
+            }
+          }
         ]
       },
       {
@@ -25,8 +33,8 @@ module.exports = {
           {
             loader: 'ejs-loader',
             options: {
-              esModule: false,  // Add this line
-              variable: 'data'  // Add this line
+              esModule: false,
+              variable: 'data'
             }
           }
         ]
@@ -74,7 +82,9 @@ module.exports = {
     alias: {
       '@libs': path.resolve(__dirname, '../shared/libs/'),
       '@classes': path.resolve(__dirname, './src/classes/'),
-      '@models': path.resolve(__dirname, '../shared/models/')
+      '@models': path.resolve(__dirname, '../shared/models/'),
+      '@icons': path.resolve(__dirname, './src/assets/icons/'),
+      '@images': path.resolve(__dirname, './src/assets/images/')
     },
   },
 };
