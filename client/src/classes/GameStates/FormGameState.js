@@ -1,4 +1,5 @@
 import PlayersAPI from "@classes/DataFetching/PlayersAPI";
+import ContainerVisibilityTransition from "@classes/ContainerVisibilityTransition";
 
 export default class FormGameState {
   constructor(requestGameState, configuration, state) {
@@ -8,43 +9,33 @@ export default class FormGameState {
     this.emailInput = document.getElementById('email-input');
     this.phoneInput = document.getElementById('phone-input');
     this.submitButton = document.getElementById('submit-btn');
-    this.cancelButton = document.getElementById('cancel-btn');
     
-    this.#showForm();
     this.emailInput.onfocus = () => this.#showAlphanumericKeyboard()
     this.phoneInput.onfocus = () => this.#showNumericKeyboard()
 
     const emailKeyboardEnterBtn = window.emailKeyboard.getButtonElement('{enter}')
     emailKeyboardEnterBtn.onclick = () => this.#showNumericKeyboard();
     
-    this.cancelButton.onclick = () => requestGameState('main-menu');
     this.submitButton.onclick = () => {
       this.#savePlayerInfo();
       requestGameState('questions');
     }
   }
   
+  initialize() {
+    this.#clearForm();
+    ContainerVisibilityTransition.hide(this.formContainer);
+  }
+  
   enter(from) {
     this.#clearForm()
     this.#showAlphanumericKeyboard();
-    this.#showForm();
+    ContainerVisibilityTransition.show(this.formContainer);
   }
   
   exit(to) {
-    if (to !== 'main-menu') {
-      this.#hideForm();
-    }
     this.submitButton.onclick = undefined;
-  }
-  
-  #hideForm() {
-    this.formContainer.classList.add('hidden')
-    this.formContainer.classList.remove('returning')
-  }
-  
-  #showForm() {
-    this.formContainer.classList.remove('hidden')
-    this.formContainer.classList.add('returning')
+    ContainerVisibilityTransition.hide(this.formContainer);
   }
 
   #savePlayerInfo() {

@@ -7,10 +7,18 @@
 
 .text-input {
     width: 100%;
-    border: #AAA solid 1px;
-    border-radius: 5px;
-    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 0.75rem 1.25rem;
     margin-bottom: 0.5rem;
+    background-color: transparent;
+}
+.text-input::placeholder { /* Firefox */
+    color: var(--color-input-placeholder);
+    opacity: 1;
+}
+.text-input::-ms-input-placeholder { /* Edge 12-18 */
+    color: var(--color-input-placeholder);
 }
 
 .input-label {
@@ -29,4 +37,46 @@
 .form-row {
     display: flex;
     gap: 0.5rem;
+}
+
+.check-box-item {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn {
+    border: none;
+    border-radius: 15px;
+    color: white;
+    background: var(--color-main);
+    padding: 1rem 2rem;
+    width: 100%;
+}
+
+input[type="checkbox"] {
+    /* Add if not using autoprefixer */
+    -webkit-appearance: none;
+    appearance: none;
+
+    font: inherit;
+    width: 1.15em;
+    height: 1.15em;
+    border: 1px solid var(--color-border);
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: grid;
+    place-content: center;
+}
+input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+}
+input[type="checkbox"]:checked {
+    background-color: var(--color-main);
+    border: 1px solid var(--color-main);
+}
+input[type="checkbox"]:checked::before {
+    background-color: white;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
 }

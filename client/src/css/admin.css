@@ -1,0 +1,41 @@
+#admin-container {
+    display: flex;
+    flex-direction: row;
+    gap: 3rem;
+    padding: 2rem;
+}
+#admin-menu-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.25rem;
+    width: 100%;
+}
+#admin-questions-input-container,
+#admin-configurations-input-container {
+    height: calc(100vh - 30rem);
+    margin-bottom: 1rem;
+    overflow-y: scroll;
+}
+
+#admin-container {
+    position: fixed;
+    width: 100vw;
+    min-height: 100vh;
+    max-width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    background: #fff1e8;
+}
+
+#admin-container h2 {
+    text-align: center;
+    font-size: 3rem;
+}
+#admin-container h3 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}

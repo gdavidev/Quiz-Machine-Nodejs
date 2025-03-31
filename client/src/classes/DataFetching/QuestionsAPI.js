@@ -12,7 +12,6 @@ export default class QuestionsAPI {
             question.alternative1,
             question.alternative2,
             question.alternative3,
-            question.alternative4,
             question.answer,
         )))
         .catch(err => console.log(err));

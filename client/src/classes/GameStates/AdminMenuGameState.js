@@ -1,6 +1,7 @@
 import QuestionDisplaySubGameState from "@classes/GameStates/AdminGameStates/QuestionsFormSubGameState";
 import ConfigurationFormSubGameState from "@classes/GameStates/AdminGameStates/ConfigurationFormSubGameState";
 import PlayersAPI from "@classes/DataFetching/PlayersAPI";
+import ContainerVisibilityTransition from "@classes/ContainerVisibilityTransition";
 
 export default class AdminMenuGameState {
     constructor(requestGameState, updateEnvironment) {
@@ -11,8 +12,6 @@ export default class AdminMenuGameState {
         this.adminConfigurationBtn = document.getElementById('admin-configuration-btn');
         this.adminExitBtn = document.getElementById('admin-exit-btn');
         this.exportPlayersInfoToCsvBtn = document.getElementById('export-players-info-to-csv-btn');
-
-        this.#hideMenu();
 
         this.adminQuestionsBtn.onclick = () => this.requestAdminGameState('questions-form')
         this.adminConfigurationBtn.onclick = () => this.requestAdminGameState('configuration-form')
@@ -30,15 +29,19 @@ export default class AdminMenuGameState {
         }
     }
 
+    initialize() {
+        ContainerVisibilityTransition.hide(this.adminContainer);
+    }
+    
     enter(from) {
-        this.#showMenu()
+        ContainerVisibilityTransition.show(this.adminContainer);
 
         this.currentState = 'questions-form'
         this.states['questions-form'].enter('', undefined);
     }
 
     exit(to) {
-        this.#hideMenu();
+        ContainerVisibilityTransition.hide(this.adminContainer);
     }
 
     requestAdminGameState(gameState, data) {
@@ -47,16 +50,6 @@ export default class AdminMenuGameState {
         this.states[this.currentState].exit(gameState);
         this.states[gameState].enter(this.currentState, data);
         this.currentState = gameState;
-    }
-
-    #hideMenu() {
-        this.adminContainer.classList.add('hidden')
-        this.adminContainer.classList.remove('returning')
-    }
-
-    #showMenu() {
-        this.adminContainer.classList.remove('hidden')
-        this.adminContainer.classList.add('returning')
     }
 
     async #exportPlayersInfoToCSV() {

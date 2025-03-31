@@ -1,48 +1,64 @@
-<header>
-    <div id="header-content-container">
-        <div id="score-container">
-            Score: <span id="score">0</span>
-        </div>
-        <div id="current-question-container">
-            <span id="current-question">0</span>
-            <span>/</span>
-            <span id="question-amount">0</span>
-        </div>
-    </div>
-</header>
-
-<main>
-    <section id="main-view-container">
-        <span id="question-text"></span>
-
-        <span id="countdown-text"></span>
-
-        <div id="result-display-container">
-            <span id="result-text"></span>
-            <div>Score: + <span id="result-score-text"></span></div>
-        </div>
-    </section>
-
-    <div id="time-bar-container">
-        <div id="time-bar"></div>
+<section id="questions-main-content-container" class="fade-container">
+    <div id="time-progress-container">
+        <div id="time-progress"></div>
     </div>
 
-    <section id="alternatives-container">
-        <button class="alternative-btn btn-blue"></button>
-        <button class="alternative-btn btn-red"></button>
-        <button class="alternative-btn btn-yellow"></button>
-        <button class="alternative-btn btn-green"></button>
-    </section>
-</main>
-
-<dialog id="final-result-dialog">
-    <div id="final-result-dialog-content">
-        <div>
-            <span id="final-result-text"></span>
-            <div>
-                Seu Score: <span id="final-result-score-text"></span>
+    <div class="card">
+        <div id="current-question-top-display-container">
+            <div id="current-question-top-display-bold">
+                <span>Pergunta</span>
+                <span id="question-top-display-current"></span>
+            </div>
+            <div id="current-question-top-display-thin">
+                <span>de</span>
+                <span id="question-top-display-amount"></span>
             </div>
         </div>
-        <button id="try-again-button">Tentar Novamente</button>
+
+        <span id="question-text">aaaaaaaaaa</span>
+
+        <section id="alternatives-container">
+            <div id="alternative-1" class="alternative-btn">
+                <span class="alternative-btn-letter">A</span>
+                <span class="alternative-btn-text"></span>
+                <span class="alternative-btn-check"></span>
+            </div>
+            <div id="alternative-2" class="alternative-btn">
+                <span class="alternative-btn-letter">B</span>
+                <span class="alternative-btn-text"></span>
+                <span class="alternative-btn-check"></span>
+            </div>
+            <div id="alternative-3" class="alternative-btn">
+                <span class="alternative-btn-letter">C</span>
+                <span class="alternative-btn-text"></span>
+                <span class="alternative-btn-check"></span>
+            </div>
+        </section>
+
+        <div id="result-text-container">
+            <span id="result-text-correct">Você Acertou!</span>
+            <span id="result-text-wrong">Você Errou!</span>
+            <span id="result-text-timeout">Acabou o tempo!</span>
+        </div>
     </div>
-</dialog>
+
+    <div id="question-progress-container">
+        <div id="question-progress-bar-container">
+            <div id="question-progress-bar"></div>
+        </div>
+
+        <div id="current-question-container">
+            <span id="current-question"></span>
+            <span>/</span>
+            <span id="question-amount"></span>
+        </div>
+    </div>
+
+    <div id="curiosities-container">
+        <img id="curiosities-icon" src="<%= require('@icons/info.svg') %>" alt="curiosities-icon">
+        <div>
+            <h3 id="curiosities-header">Curiosidades</h3>
+            <p id="curiosities-text">lorem danuyaw bvdyuavaj adbaodyhdvawy uawvuyvdyv dyawvawvdawcvdtcw</p>
+        </div>
+    </div>
+</section>

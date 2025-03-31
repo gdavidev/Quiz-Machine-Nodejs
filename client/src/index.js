@@ -6,6 +6,10 @@ import 'simple-keyboard/build/css/index.css';
 import './css/style.css';
 import './css/forms.css';
 import './css/fonts.css';
+import './css/quiz.css';
+import './css/player-form.css';
+import './css/admin.css';
+import './css/main-menu.css';
 import FormGameState from "@classes/GameStates/FormGameState";
 import AdminMenuGameState from "@classes/GameStates/AdminMenuGameState";
 import QuestionsAPI from "@classes/DataFetching/QuestionsAPI";
@@ -21,8 +25,8 @@ class PageContext {
     this.updateConfiguration = this.updateConfiguration.bind(this);
     
     this.state = {
-      score: 0,
       currentQuestion: 0,
+      correctAnswers: 0,
     };
     
     Promise.all([
@@ -32,6 +36,7 @@ class PageContext {
       this.#initializeStates()
       this.currentState = 'main-menu';
       this.states['main-menu'].enter('');
+      console.log(questions)
     });
   }
 
@@ -50,6 +55,10 @@ class PageContext {
         })
       }),
     };
+    
+    Object.values(this.states).forEach(value => {
+      value.initialize && value.initialize();
+    })
   }
   
   requestGameState(gameState) {
@@ -77,13 +86,6 @@ class PageContext {
             questions.length :
             configuration.get("numOfQuestions")
     )
-
-    document.documentElement.style.setProperty(
-        '--time-per-question-ms',
-        `${configuration.get('timePerQuestionMs')}ms`);
-    document.documentElement.style.setProperty(
-        '--time-on-results-view-ms',
-        `${configuration.get('timeOnResultsViewMs')}ms`);
   }
 }
 

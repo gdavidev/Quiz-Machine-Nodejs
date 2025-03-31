@@ -66,10 +66,6 @@ class ConfigurationRepository {
     seed() {
         const configurationItems = [
             new ConfigurationItem(
-                'Multiplicador de pontuação',
-                'scoreMultiplier',
-                10),
-            new ConfigurationItem(
                 'Tempo por questão (Milissegundos)',
                 'timePerQuestionMs',
                 5000),
@@ -81,10 +77,6 @@ class ConfigurationRepository {
                 'Quantidade de questões por round',
                 'numOfQuestions',
                 5),
-            new ConfigurationItem(
-                'Tempo do cronômetro inicial',
-                'countDownDurationSec',
-                3),
             new ConfigurationItem(
                 'Tempo para sair do resultado final por inatividade (Segundos)',
                 'goToMenuOnInactivityInResultScreenInSec',

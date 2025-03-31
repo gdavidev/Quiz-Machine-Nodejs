@@ -7,12 +7,29 @@
 </head>
 <body>
 
-<%= require('./views/admin.ejs')() %>
-<%= require('./views/player-form.ejs')() %>
-<%= require('./views/quiz.ejs')() %>
-<%= require('./views/main-menu.ejs')() %>
+<div id="background-elements">
+  <img id="leaves-image" src="<%= require('@images/leaves.svg') %>" alt="leaves">
+</div>
 
-<img src="<%= require('./assets/images/leaves.svg') %>" alt="quiz" id="quiz" />
+<main>
+  <img src="<%= require('@images/kerakoll-logo.svg') %>" alt="kerakoll">
+
+  <section id="view-container">
+    <%= require('./views/player-form.ejs')() %>
+    <%= require('./views/admin.ejs')() %>
+    <%= require('./views/quiz.ejs')() %>
+    <%= require('./views/main-menu.ejs')() %>
+    <%= require('./views/final-results.ejs')() %>
+    <%= require('./views/congrats.ejs')() %>
+  </section>
+
+  <img src="<%= require('@images/feicon-logo.svg') %>" alt="feicon">
+</main>
+
+<div id="keyboards-container">
+  <div class="simple-keyboard alphanumeric-keyboard"></div>
+  <div class="simple-keyboard numeric-keyboard"></div>
+</div>
 
 </body>
 </html>

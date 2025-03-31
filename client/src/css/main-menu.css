@@ -1,0 +1,25 @@
+#main-menu-container h1 {
+    font-size: 4rem;
+}
+
+#main-menu-container #start-game-btn,
+#main-menu-container #exit-game-btn {
+    font-size: 2rem;
+    border: none;
+    border-radius: 15px;
+    background: var(--color-main);
+    color: #fff;
+    padding: 1rem 2rem;
+}
+
+#main-menu-container {
+    position: fixed;
+    width: 100vw;
+    min-height: 100vh;
+    max-width:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+}

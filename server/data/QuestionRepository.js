@@ -16,7 +16,6 @@ class QuestionRepository {
                         row.alternative1,
                         row.alternative2,
                         row.alternative3,
-                        row.alternative4,
                         row.answer,
                     );
                 }));
@@ -27,15 +26,14 @@ class QuestionRepository {
     save(question) {
         return new Promise((resolve, reject) => {
             const stmt = this.db.prepare(`
-                INSERT INTO questions (text, alternative1, alternative2, alternative3, alternative4, answer) 
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO questions (text, alternative1, alternative2, alternative3, answer)
+                VALUES (?, ?, ?, ?, ?)
             `);
             stmt.run(
                 question.text,
                 question.alternative1,
                 question.alternative2,
                 question.alternative3,
-                question.alternative4,
                 question.answer,
                 err => {
                     err ? reject(err) : resolve(stmt)
@@ -51,8 +49,7 @@ class QuestionRepository {
                     text = ? 
                     alternative1 = ? 
                     alternative2 = ? 
-                    alternative3 = ? 
-                    alternative4 = ? 
+                    alternative3 = ?
                     answer = ? 
                 WHERE id = ?
             `);
@@ -61,7 +58,6 @@ class QuestionRepository {
                 question.alternative1,
                 question.alternative2,
                 question.alternative3,
-                question.alternative4,
                 question.answer,
                 question.id,
                 err => {
@@ -95,7 +91,6 @@ class QuestionRepository {
                 alternative1 TEXT NOT NULL,
                 alternative2 TEXT NOT NULL,
                 alternative3 TEXT NOT NULL,
-                alternative4 TEXT NOT NULL,
                 answer TEXT NOT NULL
             );
         `;
@@ -110,7 +105,6 @@ class QuestionRepository {
                 "Elefante Africano",
                 "Baleia Azul",
                 "Tubarão Branco",
-                "Girafa",
                 "Baleia Azul"
             ),
             new Question(
@@ -119,7 +113,6 @@ class QuestionRepository {
                 "Golfinho",
                 "Elefante",
                 "Corvo",
-                "Chimpanzé",
                 "Elefante"
             ),
             new Question(
@@ -128,7 +121,6 @@ class QuestionRepository {
                 "Canguru",
                 "Leão",
                 "Tigre",
-                "Urso",
                 "Canguru"
             ),
             new Question(
@@ -137,7 +129,6 @@ class QuestionRepository {
                 "Morcego",
                 "Águia",
                 "Esquilo Voador",
-                "Pinguim",
                 "Morcego"
             ),
             new Question(
@@ -146,7 +137,6 @@ class QuestionRepository {
                 "Preguiça",
                 "Morcego",
                 "Coruja",
-                "Gato",
                 "Morcego"
             ),
             new Question(
@@ -155,7 +145,6 @@ class QuestionRepository {
                 "Guepardo",
                 "Leão",
                 "Cavalo",
-                "Cão",
                 "Guepardo"
             ),
             new Question(
@@ -164,7 +153,6 @@ class QuestionRepository {
                 "Camaleão",
                 "Polvo",
                 "Lagarto",
-                "Sapo",
                 "Camaleão"
             )
         ]
