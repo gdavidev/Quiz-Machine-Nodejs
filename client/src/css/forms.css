@@ -1,8 +1,17 @@
 .alphanumeric-keyboard,
 .numeric-keyboard {
+    position: fixed;
+    bottom: 0;
     margin: 0 auto;
     width: 100%;
     max-width: var(--max-screen-width);
+
+    transform: translateY(100%);
+    transition: transform var(--slide-duration-ms) ease-in-out;
+}
+.alphanumeric-keyboard.shown,
+.numeric-keyboard.shown {
+    transform: translateY(0);
 }
 
 .text-input {

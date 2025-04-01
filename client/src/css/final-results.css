@@ -30,13 +30,13 @@
 #result-card-top-bold,
 #result-card-top-thin {
     display: flex;
-    gap: 1ch;
+    gap: 0.5ch;
 }
 #result-card-top-bold {
     font-weight: bold;
 }
 #result-card-top-thin {
-    font-weight: 400;
+    font-weight: 200;
 }
 
 #result-score-display {

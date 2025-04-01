@@ -7,9 +7,10 @@ export default class QuestionsGameState {
   constructor(requestGameState, configuration, state, questionsDb) {
     this.questionAmountElement = document.getElementById('question-amount');
     this.currentQuestionElement = document.getElementById('current-question');
+    this.topQuestionAmountElement = document.getElementById('question-top-display-amount');
+    this.topCurrentQuestionElement = document.getElementById('question-top-display-current');
     this.questionsContentContainerElement = document.getElementById('questions-view-container');
     this.questionTextElement = document.getElementById('question-text');
-    this.currentQuestionElement = document.getElementById('current-question');
     this.resultTextCorrectElement = document.getElementById('result-text-correct');
     this.resultTextWrongElement = document.getElementById('result-text-wrong');
     this.resultTextTimeoutElement = document.getElementById('result-text-timeout');
@@ -40,7 +41,9 @@ export default class QuestionsGameState {
   
   initialize() {
     this.questionAmountElement.textContent = String(this.configuration.get('numOfQuestions'));
+    this.topQuestionAmountElement.textContent = String(this.configuration.get('numOfQuestions'));
     this.currentQuestionElement.textContent = '0';
+    this.topCurrentQuestionElement.textContent = '0';
     this.#initializeCuriositiesDisplay();
     
     ContainerVisibilityTransition.instantHide(this.questionsContentContainerElement);
@@ -55,13 +58,18 @@ export default class QuestionsGameState {
   
   enter(from) {
     ContainerVisibilityTransition.show(this.questionsContentContainerElement);
-    this.alternativeslocked = false;
     
-    this.#shuffleQuestions();
-    this.#setCurrentQuestion(0)
-    this.#loadQuestion(this.questions[0]);
-    
-    this.progressCircle.start();
+    this.#clearGame();
+    this.#clearResults();
+    this.#setCurrentQuestion(0);
+    this.#countDown(() => {
+      this.alternativeslocked = false;
+      
+      this.#shuffleQuestions();
+      this.#loadQuestion(this.questions[0]);
+      
+      this.progressCircle.start();
+    })
   }
   
   exit(to) {
@@ -161,6 +169,32 @@ export default class QuestionsGameState {
     }
   }
   
+  #countDown(onFinish) {
+    let count = 3;
+    this.questionTextElement.textContent = String(count);
+    
+    const countdownRef = setInterval(() => {
+      count--;
+      if (count <= 0) {
+        this.questionTextElement.textContent = "Vai!"
+        clearInterval(countdownRef);
+        setTimeout(() => {
+          onFinish();
+        }, 1000);
+        return;
+      }
+      this.questionTextElement.textContent = String(count);
+    }, 1000);
+  }
+  
+  #clearGame() {
+    this.questionTextElement.textContent = '';
+    for (let i = 0; i < this.alternativesButtonsArr.length; i++) {
+      const alternativeText = this.alternativesButtonsArr[i].getElementsByClassName('alternative-btn-text')[0]
+      alternativeText.textContent = ''
+    }
+  }
+  
   #initializeCuriositiesDisplay() {
     let currentCuriosity = 0
     const curiosities = [
@@ -190,5 +224,6 @@ export default class QuestionsGameState {
     this.state.currentQuestion = questionNum;
     this.progressQuestions.setProgress(questionNum + 1);
     this.currentQuestionElement.textContent = String(questionNum + 1);
+    this.topCurrentQuestionElement.textContent = String(questionNum + 1);
   }
 }

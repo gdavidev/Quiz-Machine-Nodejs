@@ -87,12 +87,10 @@ main {
 }
 
 .slide-container {
-    opacity: 0;
     transform: translateY(-100vh);
     transition: transform var(--slide-duration-ms) ease-in-out;
 }
 .slide-container.shown {
-    opacity: 1;
     transform: translateY(0);
 }
 

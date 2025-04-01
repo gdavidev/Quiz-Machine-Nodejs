@@ -1,9 +1,12 @@
 import SimpleKeyboard from 'simple-keyboard';
 
 export default class Keyboard {
-  static alphanumeric(mountNodeId, onChange) {
+  static alphanumeric(mountNodeId) {
     return new SimpleKeyboard(mountNodeId,{
-      onChange: onChange,
+      onChange: (value) => {
+        if (window.alphanumericKeyboardInput)
+          window.alphanumericKeyboardInput.value = value
+      },
       mergeDisplay: true,
       layoutName: "default",
       layout: {
@@ -21,9 +24,12 @@ export default class Keyboard {
     });
   }
   
-  static numeric(mountNodeId, onChange) {
+  static numeric(mountNodeId) {
     return new SimpleKeyboard(mountNodeId,{
-      onChange: onChange,
+      onChange: (value) => {
+        if (window.numericKeyboardInput)
+          window.numericKeyboardInput.value = value
+      },
       mergeDisplay: true,
       layout: {
         default: ["1 2 3", "4 5 6", "7 8 9", "+ 0 {bksp}"],
