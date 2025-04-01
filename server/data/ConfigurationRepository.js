@@ -68,7 +68,7 @@ class ConfigurationRepository {
             new ConfigurationItem(
                 'Tempo por questão (Milissegundos)',
                 'timePerQuestionMs',
-                5000),
+                8000),
             new ConfigurationItem(
                 'Tempo na tela de resultados da questão (Milissegundos)',
                 'timeOnResultsViewMs',

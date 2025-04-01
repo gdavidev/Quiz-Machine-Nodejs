@@ -2,16 +2,16 @@
 .numeric-keyboard {
     position: fixed;
     bottom: 0;
-    margin: 0 auto;
+    left: 50%;
     width: 100%;
-    max-width: var(--max-screen-width);
+    max-width: calc(var(--max-screen-width) * 1.2);
 
-    transform: translateY(100%);
+    transform: translateX(-50%) translateY(100%);
     transition: transform var(--slide-duration-ms) ease-in-out;
 }
 .alphanumeric-keyboard.shown,
 .numeric-keyboard.shown {
-    transform: translateY(0);
+    transform: translateX(-50%) translateY(0);
 }
 
 .text-input {

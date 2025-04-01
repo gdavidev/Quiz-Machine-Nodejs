@@ -32,7 +32,7 @@ export default class ProgressCircle {
     this.bar.text.style.fontSize = '1.5rem';
     this.bar.text.style.color = window.getComputedStyle(document.documentElement).getPropertyValue('--color-text-dark');
     this.bar.svg.style.transform = 'scale(-1, 1)';
-    this.bar.svg.style.height = '70px';
+    this.bar.svg.style.height = '4rem';
     this.bar.svg.setAttribute('stroke-linecap', 'round');
     
     this.reset()

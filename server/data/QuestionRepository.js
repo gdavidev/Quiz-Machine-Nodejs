@@ -100,85 +100,86 @@ class QuestionRepository {
     seed() {
         const questions = [
             new Question(
-                1,
-                "Qual material é conhecido como 'ouro branco' na construção civil?",
-                "Mármore",
-                "Cimento",
-                "Tijolo",
-                "Cimento"
+                0,
+                'Qual desses produtos pode evitar que seu cliente reclame de mofo na parede?',
+                'Uma camada de gesso resolve',
+                'Pintura Parede Impermeabilizante',
+                'Um desumidificador',
+                'Pintura Parede Impermeabilizante',
             ),
             new Question(
-                2,
-                "Qual destes é um equipamento essencial em uma obra?",
-                "Betoneira",
-                "Microscópio",
-                "Forno Industrial",
-                "Betoneira"
+                0,
+                'Qual argamassa Kerakoll é ideal para assentar porcelanatos de super formatos – até 180x180 cm?',
+                'Rejuntalite Colorido',
+                'Argamassa Polivalente Super',
+                'Cola Monstro Ultra',
+                'Argamassa Polivalente Super',
             ),
             new Question(
-                4,
-                "Qual destes é um tipo de fundação profunda?",
-                "Radier",
-                "Sapata",
-                "Estaca",
-                "Estaca"
+                0,
+                'Para impermeabilizar uma laje de cobertura que terá trânsito eventual de pessoas e que precisa resistir aos raios UV e às intempéries, qual produto Kerakoll você utilizaria?',
+                'Cimento Chuva Não Entra Mais',
+                'Manta Líquida Impermeabilizante',
+                'Resina Telhado Feliz e Seco',
+                'Manta Líquida Impermeabilizante',
+            ),
+            
+            new Question(
+                0,
+                'Você precisa rejuntar pastilhas de vidro em uma piscina. Qual produto Kerakoll oferece juntas impermeáveis, resistência a produtos químicos e acabamento impecável?',
+                'Rejunte Piscina Brilhando Sempre',
+                'Fugalite Bio',
+                'Argamassa Liga Tudo Aquática',
+                'Fugalite Bio',
             ),
             new Question(
-                5,
-                "Qual o nome do documento que regulariza uma construção?",
-                "Habite-se",
-                "Alvará",
-                "Laudo Técnico",
-                "Habite-se"
+                0,
+                'Seu banheiro está novinho, mas o rejunte rachou e está acumulando sujeira. Qual a melhor escolha para evitar isso?',
+                'Qualquer massa branca que tiver à mão',
+                'Escolher um rejunte impermeável da Kerakoll',
+                'Melhor nem rejuntar, deixa aberto mesmo',
+                'Escolher um rejunte impermeável da Kerakoll',
             ),
             new Question(
-                9,
-                "Qual profissional é responsável pelo cálculo estrutural?",
-                "Arquiteto",
-                "Engenheiro Civil",
-                "Designer de Interiores",
-                "Engenheiro Civil"
+                0,
+                'O piso da varanda está soltando porque a argamassa usada não resistiu às mudanças de temperatura. Como evitar isso?',
+                'Trocar a varanda de lugar',
+                'Colar com durex',
+                'Usar argamassa flexível para áreas externas da Kerakoll',
+                'Usar argamassa flexível para áreas externas da Kerakoll',
             ),
             new Question(
-                10,
-                "Qual destes é um tipo de concreto especial?",
-                "Concreto celular",
-                "Concreto simples",
-                "Concreto magro",
-                "Concreto celular"
+                0,
+                'A Polivalente Pro é uma argamassa de alto desempenho que permite assentamento de peças sem limite de tamanho.',
+                'Verdadeiro',
+                'Falso',
+                'Agora você me pegou',
+                'Verdadeiro',
             ),
             new Question(
-                11,
-                "O que significa a sigla EPI na construção civil?",
-                "Equipamento de Proteção Individual",
-                "Estudo Preliminar de Impacto",
-                "Exame Periódico Institucional",
-                "Equipamento de Proteção Individual"
+                0,
+                'A época de chuvas começou e apareceu uma infiltração na sua fachada. Qual produto você deve utilizar?',
+                'Rejunte Blinda Parede Total',
+                'Parede Pintura Impermeabilizante Kerakoll',
+                'Quebrar tudo e fazer de novo',
+                'Parede Pintura Impermeabilizante Kerakoll',
             ),
             new Question(
-                12,
-                "Qual destes é um tipo de telhado verde?",
-                "Extensivo",
-                "Suspenso",
-                "Flutuante",
-                "Extensivo"
+                0,
+                'Você precisa rejuntar um piso de porcelanato em uma área interna, como uma sala de estar, com juntas de até 5 mm e quer um acabamento liso e fácil de limpar. Qual produto Kerakoll é o mais indicado?',
+                'Rejunta Tudo Rápido',
+                'Rejuntalite Acrílico',
+                'Massa Cinzenta para Rejuntar',
+                'Rejuntalite Acrílico',
             ),
             new Question(
-                13,
-                "Qual a função principal de um britador em uma obra?",
-                "Misturar concreto",
-                "Triturar materiais",
-                "Compactar solo",
-                "Triturar materiais"
+                0,
+                'Você precisa fazer uma reforma rápida e quer assentar um porcelanato sobre outro piso já existente. O que fazer?',
+                'Utilizar qualquer argamassa',
+                'Só encostar um no outro e pronto',
+                'Utilizar uma argamassa Kerakoll para sobreposição',
+                'Utilizar uma argamassa Kerakoll para sobreposição',
             ),
-            new Question(
-                15,
-                "Qual o nome do instrumento que mede o nível em uma obra?",
-                "Trena",
-                "Nível laser",
-                "Paquímetro",
-                "Nível laser"
-            )
         ];
 
         questions.forEach(question => {
@@ -187,3 +188,4 @@ class QuestionRepository {
     }
 }
 module.exports = QuestionRepository;
+
