@@ -15,11 +15,11 @@ export default class ContainerVisibilityTransition {
     }, durationMs * 1.1)
   }
   
-  static show(element) {
+  static show(element, targetStyleDisplay) {
     if (element.classList.contains('shown'))
       return;
     
-    element.style.display = 'flex';
+    element.style.display = targetStyleDisplay ?? 'flex';
     element.classList.add('shown');
   }
   

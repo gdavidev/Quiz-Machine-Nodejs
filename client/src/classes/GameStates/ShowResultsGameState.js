@@ -31,12 +31,13 @@ export default class ShowResultsGameState {
   enter(from) {
     ContainerVisibilityTransition.show(this.finalResultsContainerElement);
     const scoreRatio = this.state.correctAnswers / this.configuration.get("numOfQuestions");
+    const playerName = this.state.currentPlayerName.trim() === '' ? 'Jogador' : this.state.currentPlayerName.trim();
     
     this.resultCardTopCorrectQuestionElement.textContent = String(this.state.correctAnswers);
     this.resultCardTopTotalQuestionElement.textContent = String(this.configuration.get('numOfQuestions'));
     this.resultCorrectQuestionElement.textContent = String(this.state.correctAnswers);
     this.resultTotalQuestionElement.textContent = String(this.configuration.get('numOfQuestions'));
-    this.playerNameDisplayElement.textContent = this.state.currentPlayerName;
+    this.playerNameDisplayElement.textContent = playerName.indexOf(' ') > -1 ? playerName.slice(playerName.indexOf(' ')) : playerName;
     
     if (scoreRatio === 1) {
       this.resultEmojiImage.src = flabbergastedFace

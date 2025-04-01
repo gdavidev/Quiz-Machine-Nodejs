@@ -3,7 +3,7 @@ import ProgressBar from "progressbar.js";
 export default class ProgressCircle {
   #intervalRef = null;
   #timeoutRef = null;
-  onFinish = () => {}
+  onFinish = undefined;
   
   constructor(mountElementId, timeMs) {
     this.mountElement = document.getElementById(mountElementId);
@@ -13,7 +13,6 @@ export default class ProgressCircle {
     this.bar = new ProgressBar.Circle(this.mountElement, {
       color: window.getComputedStyle(document.documentElement).getPropertyValue('--color-main'),
       strokeWidth: 8,
-      stoke: document.documentElement.style.getPropertyValue('--color-main'),
       trailWidth: 0,
       easing: 'easeInOut',
       duration: 1000,
@@ -21,7 +20,7 @@ export default class ProgressCircle {
         autoStyleContainer: false
       },
       step: (state, circle) => {
-        const value = (this.currentTime / 1000) + 1;
+        const value = Math.round(circle.value() * this.timeMs / 1000);
         circle.setText(value);
       },
     });
@@ -30,7 +29,8 @@ export default class ProgressCircle {
     this.bar.text.style.left = 'initial';
     this.bar.text.style.top = 'initial';
     this.bar.text.style.transform = 'initial';
-    this.bar.text.style.fontSize = '2rem';
+    this.bar.text.style.fontSize = '1.5rem';
+    this.bar.text.style.color = window.getComputedStyle(document.documentElement).getPropertyValue('--color-text-dark');
     this.bar.svg.style.transform = 'scale(-1, 1)';
     this.bar.svg.style.height = '70px';
     this.bar.svg.setAttribute('stroke-linecap', 'round');
@@ -46,15 +46,16 @@ export default class ProgressCircle {
     
     this.#intervalRef = setInterval(() => {
       this.currentTime -= 1000;
-      this.bar.animate(this.currentTime / this.timeMs);
+      this.bar.animate(Math.max(this.currentTime / this.timeMs, 0));
       
       if (this.currentTime <= 0) {
         clearInterval(this.#intervalRef);
         
-        this.#timeoutRef = setTimeout(() => {
-          this.bar.setText(0);
-          this.onFinish && this.onFinish()
-        }, 1000)
+        if (typeof this.onFinish === 'function') {
+          this.#timeoutRef = setTimeout(() => {
+            this.onFinish();
+          }, 1000)
+        }
       }
     }, 1000)
   }

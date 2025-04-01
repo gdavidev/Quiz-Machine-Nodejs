@@ -101,13 +101,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 });
 
-if (!window.emailKeyboard) { // Global guard
-  window.emailKeyboard = Keyboard.alphanumeric(
-      'alphanumeric-keyboard',
-      input => { document.getElementById('email-input').value = input });
+window.alphanumericKeyboardInput = undefined
+window.numericKeyboardInput = undefined
+if (!window.alphanumericKeyboard) { // Global guard
+  window.alphanumericKeyboard = Keyboard.alphanumeric('alphanumeric-keyboard');
 }
 if (!window.numericKeyboard) { // Global guard
-  window.numericKeyboard = Keyboard.numeric(
-      'numeric-keyboard',
-      input => { document.getElementById('phone-input').value = input });
+  window.numericKeyboard = Keyboard.numeric('numeric-keyboard')
 }

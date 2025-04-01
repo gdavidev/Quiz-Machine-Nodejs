@@ -14,7 +14,7 @@ export default class QuestionsAPI {
             question.alternative3,
             question.answer,
         )))
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
   }
   
   static save(question) {
@@ -25,13 +25,13 @@ export default class QuestionsAPI {
       },
       body: JSON.stringify(question),
     })
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
   }
   
   static async delete() {
     return fetch("http://localhost:3000/api/questions/delete", {
       method: "DELETE",
     })
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
   }
 }

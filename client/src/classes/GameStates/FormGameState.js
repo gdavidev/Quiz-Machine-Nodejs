@@ -17,19 +17,10 @@ export default class FormGameState {
     this.state = state;
     this.requestGameState = requestGameState;
     
-    this.emailInput.onfocus = () => this.#showAlphanumericKeyboard()
-    this.phoneInput.onfocus = () => this.#showNumericKeyboard()
+    this.emailInput.onfocus = () => this.#showAlphanumericKeyboard(this.emailInput);
+    this.nameInput.onfocus = () => this.#showAlphanumericKeyboard(this.nameInput);
+    this.phoneInput.onfocus = () => this.#showNumericKeyboard(this.phoneInput);
     
-    const emailKeyboardEnterBtn = window.emailKeyboard.getButtonElement('{enter}')
-    emailKeyboardEnterBtn.onclick = () => this.#showNumericKeyboard();
-  }
-  
-  initialize() {
-    this.#clearForm();
-    ContainerVisibilityTransition.instantHide(this.formContainer);
-  }
-  
-  enter(from) {
     this.submitButton.onclick = () => {
       this.#savePlayerInfo();
       ContainerVisibilityTransition.hide(this.formContainer, () => {
@@ -37,14 +28,34 @@ export default class FormGameState {
       });
     }
     
-    this.#clearForm()
-    this.#showAlphanumericKeyboard();
+    const alphanumericKeyboardEnterBtn = window.alphanumericKeyboard.getButtonElement('{enter}')
+    alphanumericKeyboardEnterBtn.onclick = () => {
+      if (window.alphanumericKeyboardInput === this.nameInput)
+        this.emailInput.focus();
+      else if (window.alphanumericKeyboardInput === this.emailInput)
+        this.phoneInput.focus();
+    }
+  }
+  
+  initialize() {
+    this.#clearForm();
+    this.#hideKeyboards();
+    ContainerVisibilityTransition.instantHide(this.formContainer);
+  }
+  
+  enter(from) {
+    this.#clearForm();
     ContainerVisibilityTransition.show(this.formContainer);
+    
+    setTimeout(() => {
+      this.nameInput.focus();
+    }, 200)
   }
   
   exit(to) {
-    this.submitButton.onclick = undefined;
+    document.activeElement.blur();
     ContainerVisibilityTransition.hide(this.formContainer);
+    this.#hideKeyboards();
   }
 
   #savePlayerInfo() {
@@ -63,19 +74,32 @@ export default class FormGameState {
     this.nameInput.value = ''
     this.emailInput.value = ''
     this.phoneInput.value = ''
+    window.numericKeyboard.clearInput()
+    window.alphanumericKeyboard.clearInput()
     this.termsCheckbox.checked = false;
     this.emailOffersCheckbox.checked = false;
   }
   
-  #showNumericKeyboard() {
-    this.phoneInput.focus();
-    this.alphanumericKeyboard.style.display = 'none'
-    this.numericKeyboard.style.display = 'block'
+  #showNumericKeyboard(targetInput) {
+    this.numericKeyboard.classList.add('shown')
+    this.alphanumericKeyboard.classList.remove('shown')
+    
+    targetInput.focus();
+    window.numericKeyboard.setInput(targetInput.value)
+    window.numericKeyboardInput = targetInput
   }
   
-  #showAlphanumericKeyboard() {
-    this.emailInput.focus();
-    this.alphanumericKeyboard.style.display = 'block'
-    this.numericKeyboard.style.display = 'none'
+  #showAlphanumericKeyboard(targetInput) {
+    this.numericKeyboard.classList.remove('shown')
+    this.alphanumericKeyboard.classList.add('shown')
+    
+    targetInput.focus();
+    window.alphanumericKeyboard.setInput(targetInput.value)
+    window.alphanumericKeyboardInput = targetInput
+  }
+  
+  #hideKeyboards() {
+    this.numericKeyboard.classList.remove('shown')
+    this.alphanumericKeyboard.classList.remove('shown')
   }
 }

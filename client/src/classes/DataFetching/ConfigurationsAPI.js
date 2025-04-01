@@ -15,6 +15,6 @@ export default class ConfigurationsAPI {
       },
       body: JSON.stringify(configurationItem)
     })
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
   }
 }
