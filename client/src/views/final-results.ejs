@@ -1,6 +1,40 @@
 <section id="final-results-view-container" class="fade-container">
+    <div id="result-card-top">
+        <div id="result-card-top-bold">
+            <span id="result-card-top-correct-question"></span>
+            <span>acertos</span>
+        </div>
+        <div id="result-card-top-thin">
+            <span>de</span>
+            <span id="result-card-top-total-question"></span>
+        </div>
+    </div>
+
     <div class="card">
-        final results
+        <div id="result-banner">
+            <img id="result-banner-image" src="<%= require('@images/banner.svg') %>" alt="banner" />
+            <div id="result-emoji-container">
+                <img id="result-emoji-image" src="" alt="emoji" />
+            </div>
+
+            <div>
+                <span id="player-name-display"></span>
+                <div id="result-banner-questions-display">
+                    <span id="result-correct-question"></span>
+                    <span>/</span>
+                    <span id="result-total-question"></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-textual-container">
+            <p id="result-congrats-title">Parabéns!</p>
+            <p id="result-congrats-text">Você acaba de concluir o quiz e agora sabe ainda mais sobre construção e inovação com a Kerakoll.</p>
+        </div>
+        <div id="result-voucher-container">
+            <img src="<%= require('@images/qr-code-aqui.png') %>" alt="QR code" />
+            <p>Voucher</p>
+        </div>
     </div>
 
     <button id="play-again-button" class="btn">Jogar novamente</button>

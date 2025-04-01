@@ -1,0 +1,78 @@
+#final-results-view-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 100%;
+    flex-grow: 1;
+}
+
+#result-card-top {
+    border-radius: 15px;
+    background-color: var(--color-main);
+    margin-bottom: -2rem;
+}
+
+#result-card-top,
+#result-card-top-bold,
+#result-card-top-thin {
+    display: flex;
+    gap: 1rem;
+}
+#result-card-top-bold {
+    font-weight: bold;
+}
+#result-card-top-thin {
+    font-weight: 400;
+}
+
+#result-banner-questions-display {
+    display: flex;
+    flex-wrap: nowrap;
+    font-weight: 800;
+    font-size: 2rem;
+}
+
+#result-banner {
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+
+    justify-items: center;
+}
+#result-banner > * {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+#result-banner span {
+    color: white;
+}
+
+#result-textual-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#result-congrats-title {
+
+}
+#result-congrats-text {
+
+}
+
+#result-emoji-container {
+    display: flex;
+    width: 4rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    padding: 0.5rem;
+    background-color: white;
+    transform: translateY(-50%);
+}
+
+#result-emoji-image {
+
+}

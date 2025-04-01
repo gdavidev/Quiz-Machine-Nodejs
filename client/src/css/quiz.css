@@ -1,5 +1,5 @@
 #questions-view-container {
-
+    flex-direction: column;
 }
 
 #question-progress-container {

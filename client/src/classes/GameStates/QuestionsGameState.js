@@ -7,7 +7,7 @@ export default class QuestionsGameState {
   constructor(requestGameState, configuration, state, questionsDb) {
     this.questionAmountElement = document.getElementById('question-amount');
     this.currentQuestionElement = document.getElementById('current-question');
-    this.questionsContentContainerElement = document.getElementById('questions-main-content-container');
+    this.questionsContentContainerElement = document.getElementById('questions-view-container');
     this.questionTextElement = document.getElementById('question-text');
     this.currentQuestionElement = document.getElementById('current-question');
     this.resultTextCorrectElement = document.getElementById('result-text-correct');

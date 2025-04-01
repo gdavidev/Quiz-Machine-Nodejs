@@ -7,13 +7,13 @@ export default class ContainerVisibilityTransition {
     
     element.classList.remove('shown');
     setTimeout(() => {
-      element.style.transform = 'translateY(-100vh)';
+      element.style.display = 'none';
       onAnimationFinished && onAnimationFinished();
     }, durationMs * 1.1)
   }
   
   static show(element) {
-    element.style.transform = 'translateY(0)';
+    element.style.display = 'flex';
     element.classList.add('shown');
   }
   

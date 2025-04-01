@@ -1,9 +1,26 @@
 import ContainerVisibilityTransition from "@classes/ContainerVisibilityTransition";
+import flabbergastedFace from '@images/emojis/flabbergasted-face.png'
+import happyFace from '@images/emojis/happy-face.png'
+import stressedFace from '@images/emojis/stressed-face.png'
 
 export default class ShowResultsGameState {
   constructor(requestGameState, configuration, state) {
     this.tryAgainButtonElement = document.getElementById('play-again-button');
     this.finalResultsContainerElement = document.getElementById('final-results-view-container');
+    this.resultEmojiImage = document.getElementById('result-emoji-image');
+
+    this.resultCardTopCorrectQuestionElement = document.getElementById('result-card-top-correct-question')
+    this.resultCardTopTotalQuestionElement = document.getElementById('result-card-top-total-question')
+    this.resultCorrectQuestionElement = document.getElementById('result-correct-question')
+    this.resultTotalQuestionElement = document.getElementById('result-total-question')
+    this.playerNameDisplayElement = document.getElementById('player-name-display')
+
+    this.resultEmojiImage.src = flabbergastedFace
+    this.resultCardTopCorrectQuestionElement.textContent = '8';
+    this.resultCardTopTotalQuestionElement.textContent = '10';
+    this.resultCorrectQuestionElement.textContent = '8';
+    this.resultTotalQuestionElement.textContent = '10';
+    this.playerNameDisplayElement.textContent = 'Gabriel';
 
     this.autoQuitTimeoutRef = null;
     this.requestGameState = requestGameState;
@@ -11,7 +28,7 @@ export default class ShowResultsGameState {
     this.state = state;
 
     this.tryAgainButtonElement.onclick = () => { requestGameState('main-menu') }
-    // ContainerVisibilityTransition.hide(this.finalResultsContainerElement); TODO uncomment this comment
+    ContainerVisibilityTransition.hide(this.finalResultsContainerElement);
   }
   
   enter(from) {

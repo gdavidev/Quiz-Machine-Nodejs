@@ -10,6 +10,7 @@ import './css/quiz.css';
 import './css/player-form.css';
 import './css/admin.css';
 import './css/main-menu.css';
+import './css/final-results.css';
 import FormGameState from "@classes/GameStates/FormGameState";
 import AdminMenuGameState from "@classes/GameStates/AdminMenuGameState";
 import QuestionsAPI from "@classes/DataFetching/QuestionsAPI";
@@ -34,12 +35,8 @@ class PageContext {
       this.updateConfiguration(),
     ]).then(() => {
       this.#initializeStates()
-      // this.currentState = 'main-menu'; // TODO iniciar no menu
-      // this.states['main-menu'].enter('');
-      this.currentState = 'show-results';
-      this.states['show-results'].enter('');
-      
-      console.log(questions)
+      this.currentState = 'main-menu';
+      this.states['main-menu'].enter('');
     });
   }
 

@@ -13,13 +13,13 @@
 }
 
 #main-menu-container {
-    position: fixed;
-    width: 100vw;
-    min-height: 100vh;
-    max-width:100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 1rem;
     align-items: center;
+}
+
+#main-menu-title {
+    text-wrap: nowrap;
 }
