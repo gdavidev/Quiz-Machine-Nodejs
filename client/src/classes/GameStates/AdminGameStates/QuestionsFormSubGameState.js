@@ -43,8 +43,9 @@ export default class QuestionDisplaySubGameState {
     }
 
     #addNewQuestion() {
-        this.adminQuestionsInputContainer.appendChild(this.#createQuestionFormNugget());
         this.currentQuestionAmount++;
+        this.adminQuestionsInputContainer.appendChild(this.#createQuestionFormNugget());
+        this.adminQuestionsInputContainer.scrollTop = this.adminQuestionsInputContainer.scrollHeight;
     }
 
     #saveQuestions() {
@@ -71,7 +72,6 @@ export default class QuestionDisplaySubGameState {
 
         Array.from(formNuggets).forEach((nugget) => {
             const selectedAlternative = nugget.querySelector('input[type=radio]:checked')
-            console.log(selectedAlternative)
             
             questions[questions.length] = new Question(
                 0,

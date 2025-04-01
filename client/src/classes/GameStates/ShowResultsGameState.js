@@ -14,41 +14,43 @@ export default class ShowResultsGameState {
     this.resultCorrectQuestionElement = document.getElementById('result-correct-question')
     this.resultTotalQuestionElement = document.getElementById('result-total-question')
     this.playerNameDisplayElement = document.getElementById('player-name-display')
-
-    this.resultEmojiImage.src = flabbergastedFace
-    this.resultCardTopCorrectQuestionElement.textContent = '8';
-    this.resultCardTopTotalQuestionElement.textContent = '10';
-    this.resultCorrectQuestionElement.textContent = '8';
-    this.resultTotalQuestionElement.textContent = '10';
-    this.playerNameDisplayElement.textContent = 'Gabriel';
-
+    
     this.autoQuitTimeoutRef = null;
     this.requestGameState = requestGameState;
     this.configuration = configuration;
     this.state = state;
 
-    this.tryAgainButtonElement.onclick = () => { requestGameState('main-menu') }
-    ContainerVisibilityTransition.hide(this.finalResultsContainerElement);
+    this.tryAgainButtonElement.onclick = () => {
+      ContainerVisibilityTransition.hide(this.finalResultsContainerElement, () => {
+        requestGameState('main-menu');
+      });
+    }
+    ContainerVisibilityTransition.instantHide(this.finalResultsContainerElement);
   }
   
   enter(from) {
     ContainerVisibilityTransition.show(this.finalResultsContainerElement);
     const scoreRatio = this.state.correctAnswers / this.configuration.get("numOfQuestions");
-
-    if (scoreRatio >= 0.7) {
-      // this.finalResultTextElement.textContent = 'Parabens'
-      // this.finalResultTextElement.style.color = 'green'
+    
+    this.resultCardTopCorrectQuestionElement.textContent = String(this.state.correctAnswers);
+    this.resultCardTopTotalQuestionElement.textContent = String(this.configuration.get('numOfQuestions'));
+    this.resultCorrectQuestionElement.textContent = String(this.state.correctAnswers);
+    this.resultTotalQuestionElement.textContent = String(this.configuration.get('numOfQuestions'));
+    this.playerNameDisplayElement.textContent = this.state.currentPlayerName;
+    
+    if (scoreRatio === 1) {
+      this.resultEmojiImage.src = flabbergastedFace
     } else if (scoreRatio >= 0.5) {
-      // this.finalResultTextElement.textContent = 'Você foi bem'
-      // this.finalResultTextElement.style.color = 'orange'
+      this.resultEmojiImage.src = happyFace
     } else {
-      // this.finalResultTextElement.textContent = 'Mais sorte na próxima'
-      // this.finalResultTextElement.style.color = 'red'
+      this.resultEmojiImage.src = stressedFace
     }
 
-    // this.autoQuitTimeoutRef = setTimeout(() => {  TODO uncomment this comment
-    //   this.requestGameState('main-menu');
-    // }, this.configuration.get('goToMenuOnInactivityInResultScreenInSec') * 1000)
+    this.autoQuitTimeoutRef = setTimeout(() => {
+      ContainerVisibilityTransition.show(this.finalResultsContainerElement, () => {
+        this.requestGameState('main-menu');
+      });
+    }, this.configuration.get('goToMenuOnInactivityInResultScreenInSec') * 1000)
   }
   
   exit(to) {

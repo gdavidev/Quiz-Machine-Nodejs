@@ -28,6 +28,7 @@ class PageContext {
     this.state = {
       currentQuestion: 0,
       correctAnswers: 0,
+      currentPlayerName: '',
     };
     
     Promise.all([
@@ -55,7 +56,7 @@ class PageContext {
           this.updateQuestions(),
           this.updateConfiguration(),
         ]).then(() => {
-          this.#initializeStates()
+          this.#initializeStates();
         })
       }),
     };

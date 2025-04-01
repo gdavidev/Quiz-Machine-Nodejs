@@ -3,22 +3,34 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 80%;
     height: 100%;
     flex-grow: 1;
+    width: 100%;
+}
+
+#final-results-view-container .card {
+    margin-bottom: 0.5rem;
 }
 
 #result-card-top {
     border-radius: 15px;
     background-color: var(--color-main);
-    margin-bottom: -2rem;
+    width: 100%;
+    justify-content: center;
+    height: 5rem;
+    margin-bottom: -3rem;
+    padding: 0.5rem;
+    box-shadow: var(--default-shadow);
+}
+#result-card-top span {
+    color: white;
 }
 
 #result-card-top,
 #result-card-top-bold,
 #result-card-top-thin {
     display: flex;
-    gap: 1rem;
+    gap: 1ch;
 }
 #result-card-top-bold {
     font-weight: bold;
@@ -27,11 +39,18 @@
     font-weight: 400;
 }
 
+#result-score-display {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 #result-banner-questions-display {
     display: flex;
     flex-wrap: nowrap;
     font-weight: 800;
-    font-size: 2rem;
+    font-size: 2.5rem;
 }
 
 #result-banner {
@@ -39,6 +58,7 @@
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
 
+    margin-top: 3rem;
     justify-items: center;
 }
 #result-banner > * {
@@ -55,24 +75,36 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem 1rem 2rem 1rem;
 }
 #result-congrats-title {
-
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--color-text-dark);
 }
 #result-congrats-text {
-
+    color: var(--color-text);
 }
 
 #result-emoji-container {
     display: flex;
-    width: 4rem;
+    width: 5rem;
     aspect-ratio: 1;
     border-radius: 50%;
     padding: 0.5rem;
     background-color: white;
-    transform: translateY(-50%);
+    transform: translateY(-40%);
 }
 
 #result-emoji-image {
 
+}
+
+#result-voucher-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 1rem;
 }

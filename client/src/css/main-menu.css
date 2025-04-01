@@ -1,5 +1,6 @@
 #main-menu-container h1 {
     font-size: 4rem;
+    color: var(--color-text-dark);
 }
 
 #main-menu-container #start-game-btn,
@@ -18,6 +19,7 @@
     justify-content: center;
     gap: 1rem;
     align-items: center;
+    width: 100%;
 }
 
 #main-menu-title {

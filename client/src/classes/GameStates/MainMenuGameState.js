@@ -12,17 +12,24 @@ export default class MainMenuGameState {
   
   initialize() {
     this.state.currentQuestion = 0;
+    this.state.correctAnswers = 0;
     this.exitGameButton.onclick = () => window.close();
-    this.startGameButton.onclick = () => this.requestGameState('form');
+    this.startGameButton.onclick = () => {
+      ContainerVisibilityTransition.hide(this.mainMenuContainer, () => {
+        this.requestGameState('form');
+      });
+    }
   }
   
   enter(from) {
     ContainerVisibilityTransition.show(this.mainMenuContainer);
     
+    this.state.currentQuestion = 0;
+    this.state.correctAnswers = 0;
     document.activeElement.blur(); // Remove focus from current focused element
     document.onkeydown = (e) => {
       if (e.key === 'Enter')
-        this.requestGameState('admin')
+        this.requestGameState('admin');
     };
   }
   

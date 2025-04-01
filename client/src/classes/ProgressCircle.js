@@ -2,6 +2,7 @@ import ProgressBar from "progressbar.js";
 
 export default class ProgressCircle {
   #intervalRef = null;
+  #timeoutRef = null;
   onFinish = () => {}
   
   constructor(mountElementId, timeMs) {
@@ -31,7 +32,7 @@ export default class ProgressCircle {
     this.bar.text.style.transform = 'initial';
     this.bar.text.style.fontSize = '2rem';
     this.bar.svg.style.transform = 'scale(-1, 1)';
-    this.bar.svg.style.height = '100px';
+    this.bar.svg.style.height = '70px';
     this.bar.svg.setAttribute('stroke-linecap', 'round');
     
     this.reset()
@@ -50,7 +51,7 @@ export default class ProgressCircle {
       if (this.currentTime <= 0) {
         clearInterval(this.#intervalRef);
         
-        setTimeout(() => {
+        this.#timeoutRef = setTimeout(() => {
           this.bar.setText(0);
           this.onFinish && this.onFinish()
         }, 1000)
@@ -60,11 +61,13 @@ export default class ProgressCircle {
   
   pause() {
     clearInterval(this.#intervalRef)
+    clearTimeout(this.#timeoutRef)
   }
   
   reset() {
     clearInterval(this.#intervalRef)
-    this.bar.setText(String((this.timeMs / 1000) + 1));
+    clearTimeout(this.#timeoutRef)
+    
     this.bar.animate(1.0, {
       delay: 500,
       duration: 500,

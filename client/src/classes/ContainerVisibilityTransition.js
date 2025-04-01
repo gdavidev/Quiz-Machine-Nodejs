@@ -3,6 +3,9 @@ const slideDurationMs = Number.parseInt(window.getComputedStyle(document.documen
 
 export default class ContainerVisibilityTransition {
   static hide(element, onAnimationFinished) {
+    if (!element.classList.contains('shown'))
+      return;
+    
     const durationMs = ContainerVisibilityTransition.#getTransitionDuration(element)
     
     element.classList.remove('shown');
@@ -13,8 +16,16 @@ export default class ContainerVisibilityTransition {
   }
   
   static show(element) {
+    if (element.classList.contains('shown'))
+      return;
+    
     element.style.display = 'flex';
     element.classList.add('shown');
+  }
+  
+  static instantHide(element) {
+    element.style.display = 'none';
+    element.classList.remove('shown');
   }
   
   static #getTransitionDuration(element) {

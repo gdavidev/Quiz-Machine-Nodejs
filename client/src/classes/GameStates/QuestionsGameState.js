@@ -13,6 +13,7 @@ export default class QuestionsGameState {
     this.resultTextCorrectElement = document.getElementById('result-text-correct');
     this.resultTextWrongElement = document.getElementById('result-text-wrong');
     this.resultTextTimeoutElement = document.getElementById('result-text-timeout');
+    this.cutiositiesTextElement = document.getElementById('curiosities-text');
     this.alternativesButtonsArr = [
         document.getElementById('alternative-1'),
         document.getElementById('alternative-2'),
@@ -34,19 +35,22 @@ export default class QuestionsGameState {
     this.progressCircle = new ProgressCircle('time-progress', this.configuration.get('timePerQuestionMs'))
     this.progressCircle.onFinish = () => this.#choseAlternative(null);
     
-    this.configuration = configuration;
+    this.curiositiesIntervalRef = null;
   }
   
   initialize() {
     this.questionAmountElement.textContent = String(this.configuration.get('numOfQuestions'));
     this.currentQuestionElement.textContent = '0';
+    this.#initializeCuriositiesDisplay();
     
-    ContainerVisibilityTransition.hide(this.questionsContentContainerElement);
+    ContainerVisibilityTransition.instantHide(this.questionsContentContainerElement);
   }
   
   destroy() {
     this.progressQuestions && this.progressQuestions.destroy();
     this.progressCircle && this.progressCircle.destroy();
+    
+    clearInterval(this.curiositiesIntervalRef);
   }
   
   enter(from) {
@@ -66,7 +70,9 @@ export default class QuestionsGameState {
   
   #nextQuestion() {
     if ((this.state.currentQuestion + 1) >= this.questions.length)
-      return this.requestGameState('show-results');
+      return ContainerVisibilityTransition.hide(this.questionsContentContainerElement, () => {
+        this.requestGameState('show-results');
+      });
     
     this.#setCurrentQuestion(this.state.currentQuestion + 1);
     this.#loadQuestion(this.questions[this.state.currentQuestion]);
@@ -88,7 +94,6 @@ export default class QuestionsGameState {
     for (let i = 0; i < this.alternativesButtonsArr.length; i++) {
       this.alternativesButtonsArr[i].getElementsByClassName('alternative-btn-text')[0].textContent = randomizedAlternatives[i]
       this.alternativesButtonsArr[i].onclick = () => {
-        console.log(this)
         if (!this.alternativeslocked)
           this.#choseAlternative(randomizedAlternatives[i]);
       }
@@ -105,6 +110,7 @@ export default class QuestionsGameState {
       if (isCorrect) {
         this.#getAlternativeElement(alternative).classList.add('correct');
         this.#showResultText('correct')
+        this.state.correctAnswers++;
       } else {
         this.#getAlternativeElement(this.questions[this.state.currentQuestion].answer).classList.add('correct');
         this.#getAlternativeElement(alternative).classList.add('wrong');
@@ -114,23 +120,23 @@ export default class QuestionsGameState {
       this.#showResultText('timeout')
     }
     
-    setTimeout(() => {
-      this.alternativeslocked = false;
-      this.#clearResults();
-      this.#nextQuestion();
-    }, this.configuration.get('timeOnResultsViewMs'));
+    // setTimeout(() => {
+    //   this.alternativeslocked = false;
+    //   this.#clearResults();
+    //   this.#nextQuestion();
+    // }, this.configuration.get('timeOnResultsViewMs'));
   }
   
   #showResultText(type) {
     switch (type) {
       case 'correct':
-        this.resultTextCorrectElement.style.display = 'block';
+        this.resultTextCorrectElement.style.display = 'flex';
         break;
       case 'wrong':
-        this.resultTextWrongElement.style.display = 'block';
+        this.resultTextWrongElement.style.display = 'flex';
         break;
       case 'timeout':
-        this.resultTextTimeoutElement.style.display = 'block';
+        this.resultTextTimeoutElement.style.display = 'flex';
         break;
     }
   }
@@ -138,7 +144,6 @@ export default class QuestionsGameState {
   #getAlternativeElement(alternative) {
     for (let i = 0; i < this.alternativesButtonsArr.length; i++) {
       const alternativeText = this.alternativesButtonsArr[i].getElementsByClassName('alternative-btn-text')[0].textContent;
-      console.log(alternativeText, alternative)
       if (alternativeText === alternative) {
         return this.alternativesButtonsArr[i];
       }
@@ -154,6 +159,26 @@ export default class QuestionsGameState {
       this.alternativesButtonsArr[i].classList.remove('correct');
       this.alternativesButtonsArr[i].classList.remove('wrong');
     }
+  }
+  
+  #initializeCuriositiesDisplay() {
+    let currentCuriosity = 0
+    const curiosities = [
+      'Pirâmides do Egito – Foram construídas com blocos de até 2,5 toneladas, sem guindastes ou rodas.',
+      'Concreto romano – Dura mais de 2 mil anos e ainda resiste, como no Panteão de Roma.',
+      'Burj Khalifa – Usou concreto equivalente a 100 mil elefantes (330 mil m³).',
+      '3D printing – Já existem casas impressas em menos de 24 horas.',
+      'Tijolos de plástico – Alguns são feitos de resíduos reciclados, mais leves e resistentes.',
+    ];
+    this.cutiositiesTextElement.textContent = curiosities[currentCuriosity];
+    
+    setInterval(() => {
+      currentCuriosity++;
+      if (currentCuriosity > curiosities.length - 1)
+        currentCuriosity = 0;
+      
+      this.cutiositiesTextElement.textContent = curiosities[currentCuriosity];
+    }, 5000);
   }
   
   #shuffleQuestions() {
