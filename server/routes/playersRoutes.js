@@ -4,12 +4,12 @@ const dataAccess = require('../data/DataAccess');
 
 router.post('/players/store', async (req, res) => {
   const playerInfo = req.body;
-  if (playerInfo && playerInfo.email && playerInfo.phone) {
-    await dataAccess.playerRepository.save(playerInfo.email, playerInfo.phone);
+  if (playerInfo) {
+    await dataAccess.playerRepository.save(playerInfo);
     
     res.status(204).send();
   } else {
-    res.status(404).send();
+    res.status(400).send();
   }
 });
 

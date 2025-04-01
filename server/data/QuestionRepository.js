@@ -101,61 +101,85 @@ class QuestionRepository {
         const questions = [
             new Question(
                 1,
-                "Qual é o maior mamífero do mundo?",
-                "Elefante Africano",
-                "Baleia Azul",
-                "Tubarão Branco",
-                "Baleia Azul"
+                "Qual material é conhecido como 'ouro branco' na construção civil?",
+                "Mármore",
+                "Cimento",
+                "Tijolo",
+                "Cimento"
             ),
             new Question(
                 2,
-                "Qual animal é conhecido por ter uma memória excelente?",
-                "Golfinho",
-                "Elefante",
-                "Corvo",
-                "Elefante"
-            ),
-            new Question(
-                3,
-                "Qual destes animais é um marsupial?",
-                "Canguru",
-                "Leão",
-                "Tigre",
-                "Canguru"
+                "Qual destes é um equipamento essencial em uma obra?",
+                "Betoneira",
+                "Microscópio",
+                "Forno Industrial",
+                "Betoneira"
             ),
             new Question(
                 4,
-                "Qual é o único mamífero capaz de voar?",
-                "Morcego",
-                "Águia",
-                "Esquilo Voador",
-                "Morcego"
+                "Qual destes é um tipo de fundação profunda?",
+                "Radier",
+                "Sapata",
+                "Estaca",
+                "Estaca"
             ),
             new Question(
                 5,
-                "Qual animal é conhecido por dormir de cabeça para baixo?",
-                "Preguiça",
-                "Morcego",
-                "Coruja",
-                "Morcego"
+                "Qual o nome do documento que regulariza uma construção?",
+                "Habite-se",
+                "Alvará",
+                "Laudo Técnico",
+                "Habite-se"
             ),
             new Question(
-                6,
-                "Qual destes animais é mais rápido em terra?",
-                "Guepardo",
-                "Leão",
-                "Cavalo",
-                "Guepardo"
+                9,
+                "Qual profissional é responsável pelo cálculo estrutural?",
+                "Arquiteto",
+                "Engenheiro Civil",
+                "Designer de Interiores",
+                "Engenheiro Civil"
             ),
             new Question(
-                7,
-                "Qual animal é conhecido por mudar de cor para se camuflar?",
-                "Camaleão",
-                "Polvo",
-                "Lagarto",
-                "Camaleão"
+                10,
+                "Qual destes é um tipo de concreto especial?",
+                "Concreto celular",
+                "Concreto simples",
+                "Concreto magro",
+                "Concreto celular"
+            ),
+            new Question(
+                11,
+                "O que significa a sigla EPI na construção civil?",
+                "Equipamento de Proteção Individual",
+                "Estudo Preliminar de Impacto",
+                "Exame Periódico Institucional",
+                "Equipamento de Proteção Individual"
+            ),
+            new Question(
+                12,
+                "Qual destes é um tipo de telhado verde?",
+                "Extensivo",
+                "Suspenso",
+                "Flutuante",
+                "Extensivo"
+            ),
+            new Question(
+                13,
+                "Qual a função principal de um britador em uma obra?",
+                "Misturar concreto",
+                "Triturar materiais",
+                "Compactar solo",
+                "Triturar materiais"
+            ),
+            new Question(
+                15,
+                "Qual o nome do instrumento que mede o nível em uma obra?",
+                "Trena",
+                "Nível laser",
+                "Paquímetro",
+                "Nível laser"
             )
-        ]
+        ];
 
         questions.forEach(question => {
             this.save(question);

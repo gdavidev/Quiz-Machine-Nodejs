@@ -28,7 +28,6 @@ export default class ConfigurationFormSubGameState {
 
     saveConfigurations() {
         const configurations = this.#retrieveAllConfigurations();
-        console.log(configurations);
         configurations.forEach(config => {
             ConfigurationsAPI.update(config)
         })
@@ -39,7 +38,6 @@ export default class ConfigurationFormSubGameState {
 
         ConfigurationsAPI.get()
             .then((res) => {
-                console.log(res)
                 res.forEach(config => {
                     this.adminConfigurationsInputContainer.appendChild(
                         FormBuilder.formItem(

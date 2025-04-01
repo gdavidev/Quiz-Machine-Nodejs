@@ -30,7 +30,7 @@ export default class AdminMenuGameState {
     }
 
     initialize() {
-        ContainerVisibilityTransition.hide(this.adminContainer);
+        ContainerVisibilityTransition.instantHide(this.adminContainer);
     }
     
     enter(from) {
@@ -54,10 +54,13 @@ export default class AdminMenuGameState {
 
     async #exportPlayersInfoToCSV() {
         const players = await PlayersAPI.get();
-        console.log(players)
-        let csvContent = "email;phone\n" + players.map(p => `${p.email};${p.phone}`).join("\n");
+        
+        let csvContent = "name;email;phone;aceitou termos;aceitou envio por email\n"
+            + players.map(p =>
+                `${p.name};${p.email};${p.phone};${p.acceptedTerms ? 'sim' : 'não'};${p.acceptedEmailOffers ? 'sim' : 'não'}`
+            ).join("\n");
 
-        const blob = new Blob([csvContent], { type: "text/csv" });
+        const blob = new Blob(["\uFEFF" + csvContent], { type: "text/csv;charset=UTF-8;" });
         const a = document.createElement("a");
         a.href = URL.createObjectURL(blob);
         a.download = "players.csv";

@@ -6,18 +6,24 @@ export default class PlayersAPI {
       method: "GET",
     })
         .then(res => res.json())
-        .then(json => json.result.map(p => new PlayerInfo(p.email, p.phone)))
-        .catch(err => console.log(err));
+        .then(json => json.result.map(p => new PlayerInfo(
+            p.name,
+            p.email,
+            p.phone,
+            p.acceptedTerms,
+            p.acceptedEmailOffers
+        )))
+        .catch(err => console.error(err));
   }
   
-  static save(email, phone) {
+  static save(playerInfo) {
     fetch("http://localhost:3000/api/players/store", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({email: email, phone: phone})
+      body: JSON.stringify(playerInfo)
     })
-        .catch(err => console.log(err));
+        .catch(err => console.error(err));
   }
 }
