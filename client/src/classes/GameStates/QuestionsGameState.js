@@ -120,11 +120,11 @@ export default class QuestionsGameState {
       this.#showResultText('timeout')
     }
     
-    // setTimeout(() => {
-    //   this.alternativeslocked = false;
-    //   this.#clearResults();
-    //   this.#nextQuestion();
-    // }, this.configuration.get('timeOnResultsViewMs'));
+    setTimeout(() => {
+      this.alternativeslocked = false;
+      this.#clearResults();
+      this.#nextQuestion();
+    }, this.configuration.get('timeOnResultsViewMs'));
   }
   
   #showResultText(type) {
