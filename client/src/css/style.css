@@ -84,6 +84,13 @@ main {
     max-width: 90%;
 }
 
+.unselectable {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+}
+
 .card {
     background: var(--color-card-background);
     border-radius: 15px;

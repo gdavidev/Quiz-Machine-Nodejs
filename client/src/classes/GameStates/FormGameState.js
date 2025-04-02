@@ -23,9 +23,6 @@ export default class FormGameState {
     
     this.submitButton.onclick = () => {
       this.#savePlayerInfo();
-      ContainerVisibilityTransition.hide(this.formContainer, () => {
-        this.requestGameState('questions');
-      });
     }
     
     const alphanumericKeyboardEnterBtn = window.alphanumericKeyboard.getButtonElement('{enter}')
@@ -59,17 +56,40 @@ export default class FormGameState {
   }
 
   #savePlayerInfo() {
-    const name = String(this.nameInput.value);
-    const email = String(this.emailInput.value);
-    const phone = String(this.phoneInput.value);
+    const name = String(this.nameInput.value).trim();
+    const email = String(this.emailInput.value).trim();
+    const phone = String(this.phoneInput.value).trim();
     const acceptedTerms = this.termsCheckbox.checked ? 1 : 0;
     const acceptedEmailOffers = this.emailOffersCheckbox.checked ? 1 : 0;
     
-    this.state.currentPlayerName = name;
+    let validationFailed = false;
     
-    PlayersAPI.save(new PlayerInfo(name, email, phone, acceptedTerms, acceptedEmailOffers));
+    const schema = {
+      nameInput: name !== '',
+      emailInput: email !== '' && email.split('@').length === 2 && email.indexOf(' ') === -1,
+      phoneInput: phone !== '' && RegExp(/^\d{8,11}$/).test(phone),
+      termsCheckbox: acceptedTerms === 1,
+    }
+    Object.entries(schema).forEach(([key, value]) => {
+      if (value === false) { // Validation failed
+        validationFailed = true;
+        this[key].style.border = 'red solid 1px';
+      } else {
+        this[key].style.border = '1px solid var(--color-border)';
+      }
+    });
+    
+    if (!validationFailed) {
+      this.state.currentPlayerName = name;
+      
+      PlayersAPI.save(new PlayerInfo(name, email, phone, acceptedTerms, acceptedEmailOffers));
+      
+      ContainerVisibilityTransition.hide(this.formContainer, () => {
+        this.requestGameState('questions');
+      });
+    }
   }
-
+  
   #clearForm() {
     this.nameInput.value = ''
     this.emailInput.value = ''
@@ -78,6 +98,11 @@ export default class FormGameState {
     window.alphanumericKeyboard.clearInput()
     this.termsCheckbox.checked = false;
     this.emailOffersCheckbox.checked = false;
+    
+    this.nameInput.style.border = '1px solid var(--color-border)';
+    this.emailInput.style.border = '1px solid var(--color-border)';
+    this.phoneInput.style.border = '1px solid var(--color-border)';
+    this.termsCheckbox.style.border = '1px solid var(--color-border)';
   }
   
   #showNumericKeyboard(targetInput) {
