@@ -2,6 +2,9 @@ import ContainerVisibilityTransition from "@classes/ContainerVisibilityTransitio
 import {shuffle} from "@libs/ArrayUtilities";
 import ProgressLine from "@classes/ProgressLine";
 import ProgressCircle from "@classes/ProgressCircle";
+import checkIcon from '@icons/check.svg';
+import crossIcon from '@icons/cross.svg';
+import timerIcon from '@icons/timer.svg';
 
 export default class QuestionsGameState {
   constructor(requestGameState, configuration, state, questionsDb) {
@@ -15,6 +18,7 @@ export default class QuestionsGameState {
     this.resultTextWrongElement = document.getElementById('result-text-wrong');
     this.resultTextTimeoutElement = document.getElementById('result-text-timeout');
     this.cutiositiesTextElement = document.getElementById('curiosities-text');
+    this.resultTextIconElement = document.getElementById('result-text-icon');
     this.alternativesButtonsArr = [
         document.getElementById('alternative-1'),
         document.getElementById('alternative-2'),
@@ -136,15 +140,30 @@ export default class QuestionsGameState {
   }
   
   #showResultText(type) {
+    const resetColorFilter = 'brightness(0) saturate(100%) '
+    this.resultTextIconElement.style.display = 'block';
+
     switch (type) {
       case 'correct':
-        this.resultTextCorrectElement.style.display = 'flex';
+        this.resultTextCorrectElement.style.display = 'block';
+        this.resultTextIconElement.src = checkIcon
+        this.resultTextIconElement.style.width = '1rem'
+        this.resultTextIconElement.style.filter = resetColorFilter
+            + 'invert(98%) sepia(6%) saturate(1456%) hue-rotate(52deg) brightness(87%) contrast(83%)'
         break;
       case 'wrong':
-        this.resultTextWrongElement.style.display = 'flex';
+        this.resultTextWrongElement.style.display = 'block';
+        this.resultTextIconElement.src = crossIcon
+        this.resultTextIconElement.style.width = '1.5rem'
+        this.resultTextIconElement.style.filter = resetColorFilter
+            + 'invert(14%) sepia(77%) saturate(3998%) hue-rotate(356deg) brightness(98%) contrast(84%)'
         break;
       case 'timeout':
-        this.resultTextTimeoutElement.style.display = 'flex';
+        this.resultTextTimeoutElement.style.display = 'block';
+        this.resultTextIconElement.src = timerIcon
+        this.resultTextIconElement.style.width = '1.5rem'
+        this.resultTextIconElement.style.filter = resetColorFilter
+            + 'invert(14%) sepia(77%) saturate(3998%) hue-rotate(356deg) brightness(98%) contrast(84%)'
         break;
     }
   }
@@ -162,7 +181,8 @@ export default class QuestionsGameState {
     this.resultTextCorrectElement.style.display = 'none'
     this.resultTextWrongElement.style.display = 'none'
     this.resultTextTimeoutElement.style.display = 'none'
-    
+    this.resultTextIconElement.style.display = 'none'
+
     for (let i = 0; i < this.alternativesButtonsArr.length; i++) {
       this.alternativesButtonsArr[i].classList.remove('correct');
       this.alternativesButtonsArr[i].classList.remove('wrong');
