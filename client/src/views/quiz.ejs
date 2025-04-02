@@ -21,25 +21,39 @@
             <div id="alternative-1" class="alternative-btn">
                 <span class="alternative-btn-letter">A</span>
                 <span class="alternative-btn-text"></span>
-                <span class="alternative-btn-check"></span>
+                <span class="alternative-btn-check">
+                    <img class="alternative-btn-check-icon" src="" />
+                </span>
             </div>
             <div id="alternative-2" class="alternative-btn">
                 <span class="alternative-btn-letter">B</span>
                 <span class="alternative-btn-text"></span>
-                <span class="alternative-btn-check"></span>
+                <span class="alternative-btn-check">
+                    <img class="alternative-btn-check-icon" src="" />
+                </span>
             </div>
             <div id="alternative-3" class="alternative-btn">
                 <span class="alternative-btn-letter">C</span>
                 <span class="alternative-btn-text"></span>
-                <span class="alternative-btn-check"></span>
+                <span class="alternative-btn-check">
+                    <img class="alternative-btn-check-icon" src="" />
+                </span>
             </div>
         </section>
 
         <div id="result-text-container">
-            <img id="result-text-icon" src="" alt="result-symbol" />
-            <span id="result-text-correct">Você Acertou!</span>
-            <span id="result-text-wrong">Você Errou!</span>
-            <span id="result-text-timeout">Acabou o tempo!</span>
+            <div id="result-text-correct">
+                <img src="<%= require('@icons/check.svg') %>" alt="result-symbol" />
+                <span>Você Acertou!</span>
+            </div>
+            <div id="result-text-wrong">
+                <img src="<%= require('@icons/cross.svg') %>" alt="result-symbol" />
+                <span>Você Errou!</span>
+            </div>
+            <div id="result-text-timeout">
+                <img src="<%= require('@icons/timer.svg') %>" alt="result-symbol" />
+                <span>Acabou o tempo!</span>
+            </div>
         </div>
     </div>
 

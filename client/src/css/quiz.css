@@ -139,18 +139,23 @@
     align-items: center;
     gap: 0.25rem;
 }
-#result-text-correct {
+#result-text-correct span {
     color: var(--color-main);
 }
-#result-text-wrong {
+#result-text-timeout span,
+#result-text-wrong span{
     color: var(--color-alternative-letter-wrong);
 }
-#result-text-timeout {
-    color: var(--color-alternative-letter-wrong);
+#result-text-correct img{
+    width: 1rem;
+    filter: brightness(0) saturate(100%) invert(98%) sepia(6%) saturate(1456%) hue-rotate(52deg) brightness(87%) contrast(83%);
 }
-#result-text-icon {
-    aspect-ratio: 1 / 1;
+#result-text-wrong img,
+#result-text-timeout img {
+    width: 1.5rem;
+    filter: brightness(0) saturate(100%) invert(14%) sepia(77%) saturate(3998%) hue-rotate(356deg) brightness(98%) contrast(84%);
 }
+
 
 .alternative-btn {
     width: 100%;
@@ -219,17 +224,7 @@
     background: var(--color-alternative-letter-background-wrong);
     border: var(--color-alternative-letter-background-wrong) solid 1px;
 }
-.alternative-btn.correct .alternative-btn-check::before {
-    content: url('@icons/check.svg');
-    font-size: 0;
-    aspect-ratio: 1 / 1;
-    margin-top: 2px;
-}
-.alternative-btn.wrong .alternative-btn-check::before {
-    content: url('@icons/cross.svg');
-    font-size: 0;
-    display: flex;
-    width: 16px;
-    aspect-ratio: 1 / 1;
-}
 
+.alternative-btn-check-icon {
+    width: 1.25rem;
+}

@@ -2,9 +2,8 @@ import ContainerVisibilityTransition from "@classes/ContainerVisibilityTransitio
 import {shuffle} from "@libs/ArrayUtilities";
 import ProgressLine from "@classes/ProgressLine";
 import ProgressCircle from "@classes/ProgressCircle";
-import checkIcon from '@icons/check.svg';
-import crossIcon from '@icons/cross.svg';
-import timerIcon from '@icons/timer.svg';
+import checkIcon from '@icons/check.svg'
+import crossIcon from '@icons/cross.svg'
 
 export default class QuestionsGameState {
   constructor(requestGameState, configuration, state, questionsDb) {
@@ -18,7 +17,6 @@ export default class QuestionsGameState {
     this.resultTextWrongElement = document.getElementById('result-text-wrong');
     this.resultTextTimeoutElement = document.getElementById('result-text-timeout');
     this.cutiositiesTextElement = document.getElementById('curiosities-text');
-    this.resultTextIconElement = document.getElementById('result-text-icon');
     this.alternativesButtonsArr = [
         document.getElementById('alternative-1'),
         document.getElementById('alternative-2'),
@@ -118,14 +116,23 @@ export default class QuestionsGameState {
     
     if (alternative) {
       const isCorrect = this.questions[this.state.currentQuestion].answer === alternative
+      const selectedAlternative = this.#getAlternativeElement(alternative)
+      const selectedAlternativeIcon = selectedAlternative.getElementsByClassName('alternative-btn-check-icon')[0]
       
       if (isCorrect) {
-        this.#getAlternativeElement(alternative).classList.add('correct');
+        selectedAlternative.classList.add('correct');
+        selectedAlternativeIcon.src = checkIcon
+        
         this.#showResultText('correct')
         this.state.correctAnswers++;
       } else {
-        this.#getAlternativeElement(this.questions[this.state.currentQuestion].answer).classList.add('correct');
-        this.#getAlternativeElement(alternative).classList.add('wrong');
+        const rightAlternative = this.#getAlternativeElement(this.questions[this.state.currentQuestion].answer)
+        const rightAlternativeIcon = rightAlternative.getElementsByClassName('alternative-btn-check-icon')[0]
+        rightAlternative.classList.add('correct');
+        rightAlternativeIcon.src = checkIcon
+        
+        selectedAlternative.classList.add('wrong');
+        selectedAlternativeIcon.src = crossIcon
         this.#showResultText('wrong')
       }
     } else {
@@ -140,30 +147,15 @@ export default class QuestionsGameState {
   }
   
   #showResultText(type) {
-    const resetColorFilter = 'brightness(0) saturate(100%) '
-    this.resultTextIconElement.style.display = 'block';
-
     switch (type) {
       case 'correct':
-        this.resultTextCorrectElement.style.display = 'block';
-        this.resultTextIconElement.src = checkIcon
-        this.resultTextIconElement.style.width = '1rem'
-        this.resultTextIconElement.style.filter = resetColorFilter
-            + 'invert(98%) sepia(6%) saturate(1456%) hue-rotate(52deg) brightness(87%) contrast(83%)'
+        this.resultTextCorrectElement.style.display = 'flex';
         break;
       case 'wrong':
-        this.resultTextWrongElement.style.display = 'block';
-        this.resultTextIconElement.src = crossIcon
-        this.resultTextIconElement.style.width = '1.5rem'
-        this.resultTextIconElement.style.filter = resetColorFilter
-            + 'invert(14%) sepia(77%) saturate(3998%) hue-rotate(356deg) brightness(98%) contrast(84%)'
+        this.resultTextWrongElement.style.display = 'flex';
         break;
       case 'timeout':
-        this.resultTextTimeoutElement.style.display = 'block';
-        this.resultTextIconElement.src = timerIcon
-        this.resultTextIconElement.style.width = '1.5rem'
-        this.resultTextIconElement.style.filter = resetColorFilter
-            + 'invert(14%) sepia(77%) saturate(3998%) hue-rotate(356deg) brightness(98%) contrast(84%)'
+        this.resultTextTimeoutElement.style.display = 'flex';
         break;
     }
   }
@@ -181,11 +173,13 @@ export default class QuestionsGameState {
     this.resultTextCorrectElement.style.display = 'none'
     this.resultTextWrongElement.style.display = 'none'
     this.resultTextTimeoutElement.style.display = 'none'
-    this.resultTextIconElement.style.display = 'none'
 
-    for (let i = 0; i < this.alternativesButtonsArr.length; i++) {
-      this.alternativesButtonsArr[i].classList.remove('correct');
-      this.alternativesButtonsArr[i].classList.remove('wrong');
+    for (const altBtn of this.alternativesButtonsArr) {
+      altBtn.classList.remove('correct');
+      altBtn.classList.remove('wrong');
+    }
+    for (const iconEl of document.getElementsByClassName('alternative-btn-check-icon')) {
+      iconEl.src = ''
     }
   }
   
