@@ -22,20 +22,16 @@ let configuration = new Map()
 class PageContext {
   constructor() {
     this.requestGameState = this.requestGameState.bind(this);
-    this.updateQuestions = this.updateQuestions.bind(this);
-    this.updateConfiguration = this.updateConfiguration.bind(this);
-    
+    this.updateEnvironment = this.updateEnvironment.bind(this);
+
     this.state = {
       currentQuestion: 0,
       correctAnswers: 0,
       currentPlayerName: '',
     };
     
-    Promise.all([
-      this.updateQuestions(),
-      this.updateConfiguration(),
-    ]).then(() => {
-      this.#initializeStates()
+    this.updateEnvironment().then(() => {
+      this.#initializeStates();
       this.currentState = 'main-menu';
       this.states['main-menu'].enter('');
     });
@@ -52,10 +48,7 @@ class PageContext {
       'show-results': new ShowResultsGameState(this.requestGameState, configuration, this.state),
       'form': new FormGameState(this.requestGameState, configuration, this.state),
       'admin': new AdminMenuGameState(this.requestGameState, async () => {
-        Promise.all([
-          this.updateQuestions(),
-          this.updateConfiguration(),
-        ]).then(() => {
+        this.updateEnvironment().then(() => {
           this.#initializeStates();
         })
       }),
@@ -74,6 +67,11 @@ class PageContext {
     this.currentState = gameState;
   }
 
+  async updateEnvironment() {
+    await this.updateQuestions();
+    await this.updateConfiguration();
+  }
+
   async updateQuestions() {
     questions = await QuestionsAPI.get();
   }
@@ -86,11 +84,8 @@ class PageContext {
           !isNaN(parseFloat(config.value)) ? Number(config.value) : config.value);
     })
 
-    configuration.set("numOfQuestions",
-        configuration.get("numOfQuestions") > questions.length ?
-            questions.length :
-            configuration.get("numOfQuestions")
-    )
+    const numOfQuestions = configuration.get("numOfQuestions");
+    configuration.set("numOfQuestions", Math.min(numOfQuestions, questions.length));
   }
 }
 

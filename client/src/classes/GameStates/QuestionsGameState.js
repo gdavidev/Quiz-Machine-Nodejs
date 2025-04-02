@@ -32,9 +32,9 @@ export default class QuestionsGameState {
     this.alternativeslocked = false;
     this.requestGameState = requestGameState;
     
-    this.resultTextCorrectElement.style.display = 'none'
-    this.resultTextWrongElement.style.display = 'none'
-    this.resultTextTimeoutElement.style.display = 'none'
+    this.resultTextCorrectElement.style.display = 'none';
+    this.resultTextWrongElement.style.display = 'none';
+    this.resultTextTimeoutElement.style.display = 'none';
     
     this.progressQuestions = new ProgressLine('question-progress-bar', this.configuration.get('numOfQuestions'));
     this.progressCircle = new ProgressCircle('time-progress', this.configuration.get('timePerQuestionMs'))
