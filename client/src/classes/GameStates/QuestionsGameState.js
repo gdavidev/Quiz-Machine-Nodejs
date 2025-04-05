@@ -212,11 +212,16 @@ export default class QuestionsGameState {
   #initializeCuriositiesDisplay() {
     let currentCuriosity = 0
     const curiosities = [
-      'Pirâmides do Egito – Foram construídas com blocos de até 2,5 toneladas, sem guindastes ou rodas.',
-      'Concreto romano – Dura mais de 2 mil anos e ainda resiste, como no Panteão de Roma.',
-      'Burj Khalifa – Usou concreto equivalente a 100 mil elefantes (330 mil m³).',
-      '3D printing – Já existem casas impressas em menos de 24 horas.',
-      'Tijolos de plástico – Alguns são feitos de resíduos reciclados, mais leves e resistentes.',
+      "A umidade nas paredes pode vir tanto do solo quanto da chuva.",
+      "Peças grandes como 180x180 cm exigem uma argamassa com alta aderência e flexibilidade.",
+      "Lajes expostas precisam de impermeabilização resistente ao sol, à chuva e tráfego ocasional — produtos com proteção UV fazem toda a diferença!",
+      "Rejunte para piscinas precisa ser impermeável, resistente ao cloro e aos raios solares para evitar infiltrações.",
+      "Você sabia? O vapor quente dos banhos pode causar dilatações nos revestimentos.",
+      "A varanda gourmet se popularizou no Brasil a partir dos anos 2000, principalmente em projetos residenciais urbanos.",
+      "Quanto maior a peça, mais importante o nivelamento perfeito da base.",
+      "Infiltrações são uma das principais causas de danos estruturais em edificações.",
+      "Juntas acima de 5 mm são comuns em áreas externas ou revestimentos rústicos, enquanto juntas de 1 a 2 mm são mais utilizadas em porcelanatos e ambientes internos",
+      "A sobreposição é uma prática comum em obras públicas e comerciais para manter ambientes em funcionamento durante a reforma.",
     ];
     this.cutiositiesTextElement.textContent = curiosities[currentCuriosity];
     
