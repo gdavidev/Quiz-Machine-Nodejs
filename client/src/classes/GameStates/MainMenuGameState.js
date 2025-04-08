@@ -3,7 +3,6 @@ import ContainerVisibilityTransition from "@classes/ContainerVisibilityTransitio
 export default class MainMenuGameState {
   constructor(requestGameState, state) {
     this.startGameButton = document.getElementById('start-game-btn');
-    this.exitGameButton = document.getElementById('exit-game-btn');
     this.mainMenuContainer = document.getElementById('main-menu-container');
     
     this.state = state;
@@ -13,7 +12,6 @@ export default class MainMenuGameState {
   initialize() {
     this.state.currentQuestion = 0;
     this.state.correctAnswers = 0;
-    this.exitGameButton.onclick = () => window.close();
     this.startGameButton.onclick = () => {
       ContainerVisibilityTransition.hide(this.mainMenuContainer, () => {
         this.requestGameState('form');
