@@ -2,7 +2,7 @@ import Question from "@models/Question.js";
 
 export default class QuestionsAPI {
   static async get() {
-    return await fetch("http://191.252.102.230:3000/api/questions", {
+    return await fetch("http://localhost:3000/api/questions", {
       method: "GET",
     })
         .then(res => res.json())
@@ -18,7 +18,7 @@ export default class QuestionsAPI {
   }
   
   static save(question) {
-    fetch("http://191.252.102.230:3000/api/questions/store", {
+    fetch("http://localhost:3000/api/questions/store", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ export default class QuestionsAPI {
   }
   
   static async delete() {
-    return fetch("http://191.252.102.230:3000/api/questions/delete", {
+    return fetch("http://localhost:3000/api/questions/delete", {
       method: "DELETE",
     })
         .catch(err => console.error(err));
