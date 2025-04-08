@@ -2,7 +2,7 @@ import PlayerInfo from "@models/PlayerInfo.js";
 
 export default class PlayersAPI {
   static async get() {
-    return await fetch("http://localhost:3000/api/players", {
+    return await fetch("http://191.252.102.230:3000/api/players", {
       method: "GET",
     })
         .then(res => res.json())
@@ -17,7 +17,7 @@ export default class PlayersAPI {
   }
   
   static save(playerInfo) {
-    fetch("http://localhost:3000/api/players/store", {
+    fetch("http://191.252.102.230:3000/api/players/store", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'

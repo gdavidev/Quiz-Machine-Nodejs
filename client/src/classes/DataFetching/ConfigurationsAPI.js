@@ -1,6 +1,6 @@
 export default class ConfigurationsAPI {
   static async get() {
-    return await fetch("http://localhost:3000/api/configuration", {
+    return await fetch("http://191.252.102.230:3000/api/configuration", {
       method: "GET",
     })
         .then(res => res.json())
@@ -8,7 +8,7 @@ export default class ConfigurationsAPI {
   }
   
   static update(configurationItem) {
-    fetch("http://localhost:3000/api/configuration/update", {
+    fetch("http://191.252.102.230:3000/api/configuration/update", {
       method: "PUT",
       headers: {
         'Content-Type': 'application/json'
